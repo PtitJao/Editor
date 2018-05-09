@@ -1,15 +1,37 @@
 package settings;
 
-import javafx.application.Application;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class SettingsWindow extends Application {
-    @Override
-    public void start(Stage primaryStage) {
+public class SettingsWindow {
+    public static SettingsWindow INSTANCE;
 
+    private Stage stage;
+
+    public void start() {
+        INSTANCE = this;
+
+        Scene scene = new Scene(new Group(), Color.BLACK);
+
+        stage = new Stage();
+
+        stage.setScene(scene);
+        stage.setTitle("Settings windows");
+        stage.show();
+
+        stage.setOnCloseRequest(e -> INSTANCE = null);
+    }
+
+    private void requestFocus() {
+        stage.setIconified(false);
+        stage.requestFocus();
     }
 
     public static void launchWindow() {
-        launch();
+        if (INSTANCE == null)
+            new SettingsWindow().start();
+        INSTANCE.requestFocus();
     }
 }

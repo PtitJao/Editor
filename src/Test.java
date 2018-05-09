@@ -7,6 +7,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import settings.SettingsWindow;
 
 public class Test extends Application {
     @Override
@@ -27,7 +28,7 @@ public class Test extends Application {
         animationEditorButton.setOnAction(e -> System.out.println("\"" + animationEditorButton.getText() + "\" is not implemented yet"));
 
         Button settingsButton = new Button("Settings");
-        settingsButton.setOnAction(e -> System.out.println("\"" + settingsButton.getText() + "\" is not implemented yet"));
+        settingsButton.setOnAction(e -> SettingsWindow.launchWindow());
 
         Button newMapButton = new Button("New map");
         newMapButton.setOnAction(e -> System.out.println("\"" + newMapButton.getText() + "\" is not implemented yet"));
@@ -48,7 +49,7 @@ public class Test extends Application {
         primaryStage.show();
     }
 
-    public static void launchWindow() {
+    private static void launchWindow() {
         launch();
     }
 }

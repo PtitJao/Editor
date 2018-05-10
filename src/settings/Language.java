@@ -1,5 +1,7 @@
 package settings;
 
+import javafx.util.Pair;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,14 +12,35 @@ import java.util.List;
 import java.util.Map;
 
 public class Language {
+    private static String DEFAULT = "fr";
+    private static String folderPath = "languages" + File.separator;
+
     private Map<String, String> words;
+
+    /**
+     * Default constructor
+     * @throws Exception Thrown if unable to parse the language file
+     */
+    public Language() throws Exception {
+        init(DEFAULT);
+    }
 
     /**
      * Constructor of the language
      * @param path Path to the language file to load
+     * @throws Exception Thrown if unable to parse the language file
      */
     public Language(String path) throws Exception {
-        File file = new File(path);
+        init(path);
+    }
+
+    /**
+     * Function that loads the language
+     * @param path Path of the language file to load
+     * @throws Exception Thrown if unable to parse the language file
+     */
+    private void init(String path) throws Exception {
+        File file = new File(folderPath + path);
 
         FileInputStream fis = new FileInputStream(file);
         InputStreamReader isr = new InputStreamReader(fis);
@@ -78,15 +101,13 @@ public class Language {
     }
 
     /**
-     * Function that return all the languages'name in the language folder
-     * @return The list containing all the languages'name
+     * Function that return all the languages'name with their identifier in the language folder
+     * @return The list containing all the languages'name with their identifier
      * @throws LanguageFolderNotFoundException Thrown when the language folder does'nt exist
      * @throws LanguageFolderWrongFormatException Thrown when the language folder is not a directory
      * @throws NoLanguageFoundException Thrown when there are no language found
      */
-    public static List<String> getLanguagesName() throws LanguageFolderNotFoundException, LanguageFolderWrongFormatException, NoLanguageFoundException {
-        String folderPath = "content\\languages";
-
+    public static List<Pair<String, String>> getLanguagesName() throws LanguageFolderNotFoundException, LanguageFolderWrongFormatException, NoLanguageFoundException {
         File folder = new File(folderPath);
 
         if (!folder.exists())
@@ -94,7 +115,7 @@ public class Language {
         if (!folder.isDirectory())
             throw new LanguageFolderWrongFormatException();
 
-        List<String> ret = new ArrayList<>();
+        List<Pair<String, String>> ret = new ArrayList<>();
 
         File[] childs = folder.listFiles();
 
@@ -105,7 +126,7 @@ public class Language {
         for (File child : childs) {
             try {
                 name = getName(child.getAbsolutePath());
-                ret.add(name);
+                ret.add(new Pair<>(child.getName(), name));
             } catch (Exception e) {}
         }
 

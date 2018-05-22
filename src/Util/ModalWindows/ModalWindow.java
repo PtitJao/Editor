@@ -2,9 +2,12 @@ package Util.ModalWindows;
 
 import Util.Window;
 
-public class ModalWindow extends Window {
-    public ModalWindow(String title, String icon) {
-        start(title, icon);
+public abstract class ModalWindow<T extends ModalControllerAbstract> extends Window<T> {
+    public ModalWindow(String title, String message, String icon, String fxmlFile) {
+        start(title, icon, getClass().getResource(fxmlFile));
+        controller.setMessage(message);
+        controller.setWindow(this);
+        controller.reload(3);
     }
 
     protected void start() {

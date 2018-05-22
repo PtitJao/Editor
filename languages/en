@@ -1,2 +1,14 @@
 English
-settings:Settings
+
+SETTINGS WINDOW
+
+settingsTitle:Settings
+settingsLanguageLabel:Language
+settingsStyleLabel:Theme
+settingsDirectoryLabel:Project directory
+
+BUTTONS
+
+okButton:Ok
+applyButton:Apply
+cancelButton:Cancel

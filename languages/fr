@@ -1,2 +1,14 @@
 Français
-settings:Options
+
+SETTINGS WINDOW
+
+settingsTitle:Options
+settingsLanguageLabel:Langage
+settingsStyleLabel:Theme
+settingsDirectoryLabel:Dossier de projet
+
+BUTTONS
+
+okButton:Ok
+applyButton:Appliquer
+cancelButton:Annuler

@@ -12,10 +12,11 @@ import java.util.List;
 import java.util.Map;
 
 public class Language {
-    private static String DEFAULT = "fr";
+    private static String DEFAULT = "en";
     private static String folderPath = "languages" + File.separator;
 
     private Map<String, String> words;
+    private String name;
 
     /**
      * Default constructor
@@ -40,6 +41,8 @@ public class Language {
      * @throws Exception Thrown if unable to parse the language file
      */
     private void init(String path) throws Exception {
+        name = path;
+
         File file = new File(folderPath + path);
 
         FileInputStream fis = new FileInputStream(file);
@@ -127,7 +130,9 @@ public class Language {
             try {
                 name = getName(child.getAbsolutePath());
                 ret.add(new Pair<>(child.getName(), name));
-            } catch (Exception e) {}
+            } catch (Exception e) {
+                // DO NOTHING : One language hasn't been filled
+            }
         }
 
         if (ret.size() == 0)
@@ -137,24 +142,32 @@ public class Language {
     }
 
     /*
+     * GETTERS
+     */
+
+    public String getName() {
+        return name;
+    }
+
+    /*
      * CUSTOM EXCEPTIONS
      */
 
     public static class LanguageException extends Exception {
-        public LanguageException(String msg) { super(msg); }
+        private LanguageException(String msg) { super(msg); }
     }
     public static class LanguageFolderNotFoundException extends LanguageException {
-        public LanguageFolderNotFoundException() {
+        private LanguageFolderNotFoundException() {
             super("Languages folder is not found");
         }
     }
     public static class LanguageFolderWrongFormatException extends LanguageException {
-        public LanguageFolderWrongFormatException() {
+        private LanguageFolderWrongFormatException() {
             super("content/languages is not a folder");
         }
     }
     public static class NoLanguageFoundException extends LanguageException {
-        public NoLanguageFoundException() {
+        private NoLanguageFoundException() {
             super("No language file has been found");
         }
     }

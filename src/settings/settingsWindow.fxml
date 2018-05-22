@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="5.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="settings.SettingsController">
+   <children>
+      <HBox spacing="10.0">
+         <children>
+            <HBox alignment="CENTER" spacing="5.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label fx:id="languageLabel" text="Label" />
+                  <ChoiceBox fx:id="languageChoice" prefWidth="150.0" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" spacing="5.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label fx:id="styleLabel" text="Label" />
+                  <ChoiceBox fx:id="styleChoice" prefWidth="150.0" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+      <Separator prefWidth="200.0" />
+      <HBox alignment="CENTER" spacing="5.0">
+         <children>
+            <Label fx:id="directoryLabel" text="Label" />
+            <TextField fx:id="directoryField" disable="true" editable="false" HBox.hgrow="SOMETIMES" />
+            <Button fx:id="directoryButton" mnemonicParsing="false" onAction="#directoryChoose" text="..." />
+         </children>
+      </HBox>
+      <Separator prefWidth="200.0" />
+      <HBox spacing="2.0">
+         <children>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button fx:id="okButton" mnemonicParsing="false" onAction="#okClicked" text="Button" />
+            <Button fx:id="applyButton" mnemonicParsing="false" onAction="#applyClicked" text="Button" />
+            <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelClicked" text="Button" />
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</VBox>

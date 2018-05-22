@@ -38,7 +38,7 @@ public class Settings {
         try {
             language = new Language();
         } catch (Exception e2) {
-            new ModalExceptionWindow("Default language", "Unable to load default lanquage.\nApplication will close.");
+            new ModalExceptionWindow("Default language", "Unable to load default language.\nApplication will close.");
         }
     }
 }

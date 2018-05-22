@@ -6,9 +6,14 @@ settingsTitle:Settings
 settingsLanguageLabel:Language
 settingsStyleLabel:Theme
 settingsDirectoryLabel:Project directory
+settingsDirectoryChooser:Choose your project directory
+settingsDirectoryErrorTitle:Project folder
+settingsDirectoryErrorMessage:is not a folder
 
 BUTTONS
 
 okButton:Ok
 applyButton:Apply
 cancelButton:Cancel
+yes:Yes
+no:No

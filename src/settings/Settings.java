@@ -3,12 +3,15 @@ package settings;
 import Util.ModalWindows.ModalExceptionWindow;
 import Util.ModalWindows.ModalInfoWindow;
 
+import javax.swing.text.html.StyleSheet;
 import java.io.File;
 
 public class Settings {
     private static String PATH = "config";
 
     public static Language language;
+    public static StyleSheet theme = null;
+    public static String defaultDirectory  = null;
 
     public static void init() {
         if (new File(PATH).exists()) {

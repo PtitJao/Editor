@@ -6,9 +6,14 @@ settingsTitle:Options
 settingsLanguageLabel:Langage
 settingsStyleLabel:Theme
 settingsDirectoryLabel:Dossier de projet
+settingsDirectoryChooser:Choisissez votre dossiez de projet
+settingsDirectoryErrorTitle:Dossier de projet
+settingsDirectoryErrorMessage:n'est pas un dossier
 
 BUTTONS
 
 okButton:Ok
 applyButton:Appliquer
 cancelButton:Annuler
+yes:Oui
+no:Non

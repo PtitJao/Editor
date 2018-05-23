@@ -70,13 +70,13 @@ public class Language {
     /**
      * Function that returns the word corresponding to the key
      * @param key The identifier of the word (same for all languages)
-     * @return The word in the right language or "undefined" if the key doesn't exists
+     * @return The word in the right language or the key if the key is not associated with any word
      */
     public String getWord(String key) {
         String ret = words.get(key);
 
         if (ret == null)
-            ret = "Undefined";
+            ret = key;
 
         return ret;
     }

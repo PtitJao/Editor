@@ -4,14 +4,14 @@ import Util.ModalWindows.ModalExceptionWindow;
 import Util.ModalWindows.ModalInfoWindow;
 
 import javax.swing.text.html.StyleSheet;
-import java.io.File;
+import java.io.*;
 
 public class Settings {
     private static String PATH = "config";
 
     public static Language language;
     public static StyleSheet theme = null;
-    public static String defaultDirectory  = null;
+    public static String defaultDirectory  = "";
 
     public static void init() {
         if (new File(PATH).exists()) {
@@ -21,10 +21,42 @@ public class Settings {
         defaultLanguage();
     }
 
-    public static void initFromFile() {
-        String language = "en";
+    private static void initFromFile() {
+        File file = new File(PATH);
+        try {
+            InputStream is = new FileInputStream(file);
+            InputStreamReader isr = new InputStreamReader(is);
+            BufferedReader br = new BufferedReader(isr);
 
-        loadLanguage(language);
+            language = new Language(br.readLine());
+            defaultDirectory = br.readLine();
+
+            br.close();
+            isr.close();
+            is.close();
+        } catch (Exception e) {
+            defaultLanguage();
+        }
+    }
+
+    public static void save() {
+        File file = new File(PATH);
+
+        try {
+            OutputStream os = new FileOutputStream(file);
+            OutputStreamWriter osw = new OutputStreamWriter(os);
+            BufferedWriter bw = new BufferedWriter(osw);
+
+            bw.write(language.getName());
+            bw.newLine();
+            bw.write(defaultDirectory);
+
+            bw.close();
+            osw.close();
+            os.close();
+        } catch (Exception e) {
+            // NOTHING TO DO, SAVE JUST FAILED
+        }
     }
 
     public static void loadLanguage(String lang) {
@@ -37,7 +69,7 @@ public class Settings {
         }
     }
 
-    public static void defaultLanguage() {
+    private static void defaultLanguage() {
         try {
             language = new Language();
         } catch (Exception e2) {

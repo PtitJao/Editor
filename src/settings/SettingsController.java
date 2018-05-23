@@ -90,17 +90,24 @@ public class SettingsController extends Controller {
             Settings.loadLanguage(names.get(languages.indexOf(languageChoice.getValue())).getKey());
         }
 
-        SettingsWindow.INSTANCE.reload(reloadValue);
-
+        boolean test = false;
         if (!directoryField.getText().equals("")) {
             File defaultDirectory = new File(directoryField.getText());
 
-            if (!defaultDirectory.exists() || !defaultDirectory.isDirectory()) {
-                new ModalInfoWindow(Settings.language.getWord("settingsDirectoryErrorTitle"), directoryField.getText() + " " + Settings.language.getWord("settingsDirectoryErrorMessage"));
-                directoryField.setText("");
-            }
+            test = !defaultDirectory.exists() || !defaultDirectory.isDirectory();
         }
+
         Settings.defaultDirectory = directoryField.getText();
+
+        SettingsWindow.INSTANCE.reload(reloadValue);
+
+        if (test) {
+            new ModalInfoWindow(Settings.language.getWord("settingsDirectoryErrorTitle"), directoryField.getText() + " " + Settings.language.getWord("settingsDirectoryErrorMessage"));
+            directoryField.setText("");
+            Settings.defaultDirectory = directoryField.getText();
+        }
+
+        Settings.save();
     }
 
     @FXML
@@ -118,6 +125,7 @@ public class SettingsController extends Controller {
     public void reload(int value) {
         super.reload(value);
 
+        directoryField.setText(Settings.defaultDirectory);
         try {
             names = Language.getLanguagesName();
             names.sort((o1, o2) -> o1.getValue().compareTo(o2.getValue()));

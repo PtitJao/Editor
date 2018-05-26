@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
 import javafx.util.Pair;
+import tilesetEditor.TilesetWindow;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -101,6 +102,8 @@ public class SettingsController extends Controller {
 
         SettingsWindow.INSTANCE.reload(reloadValue);
 
+        reloadAll(reloadValue);
+
         if (test) {
             new ModalInfoWindow(Settings.language.getWord("settingsDirectoryErrorTitle"), directoryField.getText() + " " + Settings.language.getWord("settingsDirectoryErrorMessage"));
             directoryField.setText("");
@@ -108,6 +111,11 @@ public class SettingsController extends Controller {
         }
 
         Settings.save();
+    }
+
+    private void reloadAll(int value) {
+        if (TilesetWindow.INSTANCE != null)
+            TilesetWindow.INSTANCE.reload(value);
     }
 
     @FXML

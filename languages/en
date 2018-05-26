@@ -1,5 +1,18 @@
 English
 
+MENUS
+
+menuFile:File
+menuFileNew:New
+menuFileOpen:Open
+menuFileSave:Save
+menuFileClose:Close
+menuFileSettings:Settings
+menuFileQuit:Quit
+
+menuHelp:Help
+menuHelpAbout:About
+
 SETTINGS WINDOW
 
 settingsTitle:Settings
@@ -9,6 +22,21 @@ settingsDirectoryLabel:Project directory
 settingsDirectoryChooser:Choose your project directory
 settingsDirectoryErrorTitle:Project folder
 settingsDirectoryErrorMessage:is not a folder
+
+TILESET WINDOW
+
+tilesetTitle:Tileset editor
+tilesetFileLabel:File
+tilesetFilenameLabel:Image filename
+tilesetBrowse:Browse an image file
+tilesetNameLabel:Tileset name
+tilesetInfoLabel:Info
+tilesetColumnLabel:Columns
+tilesetLineLabel:Lines
+tilesetOffsetLabel:Offset
+tilesetProperties:Properties
+tilesetValidateButton:Validate
+tilesetResetButton:Cancel
 
 BUTTONS
 

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tilesetEditor.TilesetController">
+   <children>
+      <MenuBar VBox.vgrow="NEVER">
+         <menus>
+            <Menu fx:id="menuFile" mnemonicParsing="false" text="File">
+               <items>
+                  <MenuItem fx:id="menuFileNew" mnemonicParsing="false" onAction="#newClicked" text="New" />
+                  <MenuItem fx:id="menuFileOpen" mnemonicParsing="false" onAction="#openClicked" text="Open…" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem fx:id="menuFileSave" mnemonicParsing="false" onAction="#saveClicked" text="Save" />
+                  <MenuItem fx:id="menuFileClose" mnemonicParsing="false" onAction="#closeClicked" text="Close" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem fx:id="menuFileSettings" mnemonicParsing="false" onAction="#settingsClicked" text="Preferences…" />
+                  <MenuItem fx:id="menuFileQuit" mnemonicParsing="false" onAction="#quitClicked" text="Quit" />
+               </items>
+            </Menu>
+            <Menu fx:id="menuHelp" mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem fx:id="menuHelpAbout" mnemonicParsing="false" onAction="#aboutClicked" text="About" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <HBox alignment="CENTER">
+         <children>
+            <VBox>
+               <HBox.margin>
+                  <Insets left="5.0" right="5.0" />
+               </HBox.margin>
+               <children>
+                  <HBox alignment="CENTER" spacing="5.0">
+                     <children>
+                        <Label fx:id="fileLabel" text="Label" />
+                        <Separator prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <VBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label fx:id="filenameLabel" text="Label" />
+                              <Label fx:id="nameLabel" text="Label" />
+                           </children>
+                        </VBox>
+                        <VBox spacing="2.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <TextField fx:id="filenameField" editable="false" />
+                              <TextField fx:id="nameField" />
+                           </children>
+                           <HBox.margin>
+                              <Insets left="5.0" right="1.0" />
+                           </HBox.margin>
+                        </VBox>
+                        <Button mnemonicParsing="false" onAction="#filenameButtonClicked" text="..." />
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="20.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" spacing="5.0">
+                     <children>
+                        <Label fx:id="infoLabel" text="Label" />
+                        <Separator prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="5.0">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="20.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                     <children>
+                        <VBox alignment="CENTER_LEFT" spacing="10.0">
+                           <children>
+                              <Label fx:id="columnLabel" text="Label" />
+                              <Label fx:id="lineLabel" text="Label" />
+                              <Label fx:id="offsetLabel" text="Label" />
+                           </children>
+                        </VBox>
+                        <VBox spacing="2.0">
+                           <children>
+                              <Spinner fx:id="columnSpinner" />
+                              <Spinner fx:id="lineSpinner" />
+                              <Spinner fx:id="offsetSpinner" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <Separator prefWidth="200.0">
+                     <padding>
+                        <Insets bottom="3.0" />
+                     </padding>
+                  </Separator>
+                  <HBox alignment="CENTER" spacing="1.0">
+                     <children>
+                        <Button fx:id="validateButton" mnemonicParsing="false" onAction="#validateClicked" text="Button" />
+                        <Button fx:id="resetButton" mnemonicParsing="false" onAction="#resetClicked" text="Button" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Separator orientation="VERTICAL" HBox.hgrow="ALWAYS" />
+            <Pane fx:id="tilesetPanel" prefWidth="216.0" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+               </padding></Pane>
+            <VBox>
+               <children>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addClicked" HBox.hgrow="ALWAYS">
+                           <graphic>
+                              <ImageView>
+                                 <image>
+                                    <Image url="@../icon/tilesetEditor/+.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#removeClicked" HBox.hgrow="ALWAYS">
+                           <graphic>
+                              <ImageView>
+                                 <image>
+                                    <Image url="@../icon/tilesetEditor/-.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#modifiyClicked" HBox.hgrow="ALWAYS">
+                           <graphic>
+                              <ImageView>
+                                 <image>
+                                    <Image url="@../icon/tilesetEditor/crayon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#exportClicked" HBox.hgrow="ALWAYS">
+                           <graphic>
+                              <ImageView>
+                                 <image>
+                                    <Image url="@../icon/tilesetEditor/export.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#importClicked" HBox.hgrow="ALWAYS">
+                           <graphic>
+                              <ImageView>
+                                 <image>
+                                    <Image url="@../icon/tilesetEditor/import.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <TreeView fx:id="propertiesTree" prefHeight="100.0" VBox.vgrow="ALWAYS" />
+               </children>
+            </VBox>
+         </children>
+         <VBox.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </VBox.margin>
+      </HBox>
+   </children>
+</VBox>

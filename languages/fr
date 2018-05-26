@@ -1,5 +1,18 @@
 Français
 
+MENUS
+
+menuFile:Fichier
+menuFileNew:Nouveau
+menuFileOpen:Ouvrir
+menuFileSave:Sauvegarder
+menuFileClose:Fermer
+menuFileSettings:Options
+menuFileQuit:Quitter
+
+menuHelp:Aide
+menuHelpAbout:A propos
+
 SETTINGS WINDOW
 
 settingsTitle:Options
@@ -9,6 +22,21 @@ settingsDirectoryLabel:Dossier de projet
 settingsDirectoryChooser:Choisissez votre dossiez de projet
 settingsDirectoryErrorTitle:Dossier de projet
 settingsDirectoryErrorMessage:n'est pas un dossier
+
+TILESET WINDOW
+
+tilesetTitle:Editeur de tileset
+tilesetFileLabel:Fichier
+tilesetFilenameLabel:Nom du fichier image
+tilesetBrowse:Chercher une image
+tilesetNameLabel:Nom du tileset
+tilesetInfoLabel:Info
+tilesetColumnLabel:Colonnes
+tilesetLineLabel:Lignes
+tilesetOffsetLabel:Decalage
+tilesetProperties:Proprietes
+tilesetValidateButton:Valider
+tilesetResetButton:Annuler
 
 BUTTONS
 

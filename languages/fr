@@ -10,8 +10,38 @@ menuFileClose:Fermer
 menuFileSettings:Options
 menuFileQuit:Quitter
 
+menuEdit:Editer
+menuEditUndo:Annuler
+menuEditRedo:Refaire
+menuEditCut:Couper
+menuEditCopy:Copier
+menuEditPaste:Coller
+menuEditDelete:Supprimer
+menuEditSelectAll:Tout selectionner
+menuEditClearSelection:Annuler selection
+
+menuLayer:Couche
+menuLayerPalette:Palette
+menuLayerShowTerrain:Afficher terrain
+menuLayerShowObject:Afficher objet
+menuLayerShowAll:Tout afficher
+
+menuEditors:Editeurs
+
 menuHelp:Aide
 menuHelpAbout:A propos
+
+MAP EDITOR
+
+mapTitle:Editeur de carte
+
+OBJECT EDITOR
+
+objectTitle:Editeur d'objet
+
+ANIMATION
+
+animationTitle:Editeur d'animation
 
 SETTINGS WINDOW
 

@@ -1,4 +1,4 @@
-package Util.ModalWindows;
+package util.ModalWindows;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

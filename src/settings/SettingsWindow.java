@@ -1,6 +1,6 @@
 package settings;
 
-import Util.Window;
+import util.Window;
 import javafx.stage.Modality;
 
 public class SettingsWindow extends Window<SettingsController> {

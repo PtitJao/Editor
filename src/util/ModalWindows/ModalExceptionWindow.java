@@ -1,4 +1,4 @@
-package Util.ModalWindows;
+package util.ModalWindows;
 
 public class ModalExceptionWindow extends ModalWindow<ModalController> {
     public ModalExceptionWindow(String title, String message) {

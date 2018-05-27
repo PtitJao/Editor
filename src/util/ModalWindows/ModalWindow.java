@@ -1,6 +1,6 @@
-package Util.ModalWindows;
+package util.ModalWindows;
 
-import Util.Window;
+import util.Window;
 
 public abstract class ModalWindow<T extends ModalControllerAbstract> extends Window<T> {
     public ModalWindow(String title, String message, String icon, String fxmlFile) {

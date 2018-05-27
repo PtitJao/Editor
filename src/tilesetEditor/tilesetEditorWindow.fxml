@@ -23,19 +23,68 @@
          <menus>
             <Menu fx:id="menuFile" mnemonicParsing="false" text="File">
                <items>
-                  <MenuItem fx:id="menuFileNew" mnemonicParsing="false" onAction="#newClicked" text="New" />
-                  <MenuItem fx:id="menuFileOpen" mnemonicParsing="false" onAction="#openClicked" text="Open…" />
+                  <MenuItem fx:id="menuFileNew" mnemonicParsing="false" onAction="#newClicked" text="New">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../icon/file/newfileicon16.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
+                  <MenuItem fx:id="menuFileOpen" mnemonicParsing="false" onAction="#openClicked" text="Open">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../icon/file/openicon16.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem fx:id="menuFileSave" mnemonicParsing="false" onAction="#saveClicked" text="Save" />
-                  <MenuItem fx:id="menuFileClose" mnemonicParsing="false" onAction="#closeClicked" text="Close" />
+                  <MenuItem fx:id="menuFileSave" mnemonicParsing="false" onAction="#saveClicked" text="Save">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../icon/file/saveicon16.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
+                  <MenuItem fx:id="menuFileClose" mnemonicParsing="false" onAction="#closeClicked" text="Close">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../icon/file/closemapicon16.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem fx:id="menuFileSettings" mnemonicParsing="false" onAction="#settingsClicked" text="Preferences…" />
-                  <MenuItem fx:id="menuFileQuit" mnemonicParsing="false" onAction="#quitClicked" text="Quit" />
+                  <MenuItem fx:id="menuFileSettings" mnemonicParsing="false" onAction="#settingsClicked" text="Settings">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../icon/window/preferencesicon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
+                  <MenuItem fx:id="menuFileQuit" mnemonicParsing="false" onAction="#quitClicked" text="Quit">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../icon/file/exit.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
                </items>
             </Menu>
             <Menu fx:id="menuHelp" mnemonicParsing="false" text="Help">
                <items>
-                  <MenuItem fx:id="menuHelpAbout" mnemonicParsing="false" onAction="#aboutClicked" text="About" />
+                  <MenuItem fx:id="menuHelpAbout" mnemonicParsing="false" onAction="#aboutClicked" text="About">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../icon/window/InfoIcon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
                </items>
             </Menu>
          </menus>

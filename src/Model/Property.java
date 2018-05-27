@@ -5,6 +5,7 @@ import java.util.List;
 public class Property {
 
     private String name;
+
     private List<PropertySpecification> specif;
 
     public Property(String name, List<PropertySpecification> specif) {

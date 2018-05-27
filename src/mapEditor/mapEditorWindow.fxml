@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckMenuItem?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapEditor.MapController">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu fx:id="menuFile" mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem fx:id="menuFileNew" mnemonicParsing="false" onAction="#newMapClicked" text="New">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../icon/file/newfileicon16.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
+            <MenuItem fx:id="menuFileOpen" mnemonicParsing="false" onAction="#openClicked" text="Open">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../icon/file/openicon16.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem fx:id="menuFileSave" mnemonicParsing="false" onAction="#saveClicked" text="Save">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../icon/file/saveicon16.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
+            <MenuItem fx:id="menuFileClose" mnemonicParsing="false" onAction="#closeClicked" text="Close">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../icon/file/closemapicon16.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem fx:id="menuFileSettings" mnemonicParsing="false" onAction="#settingsClicked" text="Settings">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../icon/window/preferencesicon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
+            <MenuItem fx:id="menuFileQuit" mnemonicParsing="false" onAction="#quitClicked" text="Quit">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../icon/file/exit.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
+          </items>
+        </Menu>
+        <Menu fx:id="menuEdit" mnemonicParsing="false" text="Edit">
+          <items>
+            <MenuItem fx:id="menuEditUndo" mnemonicParsing="false" onAction="#undoClicked" text="Undo">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../icon/edit/undoicon16.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
+            <MenuItem fx:id="menuEditRedo" mnemonicParsing="false" onAction="#redoClicked" text="Redo">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../icon/edit/redoicon16.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem fx:id="menuEditCut" mnemonicParsing="false" onAction="#cutClicked" text="Cut">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../icon/edit/cuticon16.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
+            <MenuItem fx:id="menuEditCopy" mnemonicParsing="false" onAction="#copyClicked" text="Copy">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../icon/edit/copyicon16.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
+            <MenuItem fx:id="menuEditPaste" mnemonicParsing="false" onAction="#pasteClicked" text="Paste">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../icon/edit/pasteicon16.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
+            <MenuItem fx:id="menuEditDelete" mnemonicParsing="false" onAction="#deleteClicked" text="Delete">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../icon/edit/poubelle.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem fx:id="menuEditSelectAll" mnemonicParsing="false" onAction="#selectAllClicked" text="Select All" />
+            <MenuItem fx:id="menuEditClearSelection" mnemonicParsing="false" onAction="#clearSelectionClicked" text="Clear selection" />
+          </items>
+        </Menu>
+            <Menu fx:id="menuLayer" mnemonicParsing="false" text="Layer">
+               <items>
+                  <MenuItem fx:id="menuLayerPalette" mnemonicParsing="false" onAction="#paletteClicked" text="Palette" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <Menu fx:id="menuLayerShowTerrain" mnemonicParsing="false" text="Show terrain">
+                    <items>
+                        <CheckMenuItem fx:id="menuLayerShowAllTerrain" mnemonicParsing="false" onAction="#showAllTerrainClicked" selected="true" text="Show all" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                    </items>
+                  </Menu>
+                  <Menu fx:id="menuLayerShowObject" mnemonicParsing="false" text="Show objects">
+                     <items>
+                        <CheckMenuItem fx:id="menuLayerShowAllObject" mnemonicParsing="false" onAction="#showAllObjectClicked" selected="true" text="Show all" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                     </items>
+                  </Menu>
+               </items>
+            </Menu>
+            <Menu fx:id="menuEditors" mnemonicParsing="false" text="Editors">
+              <items>
+                <MenuItem fx:id="menuEditorsGameObjectEditor" mnemonicParsing="false" onAction="#gameObjectEditorClicked" text="GameObject Editor">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../icon/window/gameobjeteditor16.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </MenuItem>
+                  <MenuItem fx:id="menuEditorsAnimationEditor" mnemonicParsing="false" onAction="#animationEditorClicked" text="Animation Editor">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../icon/window/animeditor16.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </MenuItem>
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem fx:id="menuEditorsTilesetEditor" mnemonicParsing="false" onAction="#tilesetEditorClicked" text="Tileset Editor">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../icon/window/tileditor.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </MenuItem>
+              </items>
+            </Menu>
+        <Menu fx:id="menuHelp" mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem fx:id="menuHelpAbout" mnemonicParsing="false" onAction="#aboutClicked" text="About">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../icon/window/InfoIcon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </MenuItem>
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+      <BorderPane VBox.vgrow="ALWAYS">
+         <top>
+            <HBox alignment="CENTER_LEFT" BorderPane.alignment="CENTER_LEFT">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#newMapClicked" HBox.hgrow="ALWAYS">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../icon/file/newfileicon16.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#openClicked" HBox.hgrow="ALWAYS">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../icon/file/openicon16.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#saveClicked" HBox.hgrow="ALWAYS">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../icon/file/saveicon16.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Separator orientation="VERTICAL">
+                     <HBox.margin>
+                        <Insets left="3.0" />
+                     </HBox.margin>
+                  </Separator>
+                  <Button mnemonicParsing="false" onAction="#undoClicked" HBox.hgrow="ALWAYS">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../icon/edit/undoicon16.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button layoutX="106.0" layoutY="10.0" mnemonicParsing="false" onAction="#redoClicked" HBox.hgrow="ALWAYS">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../icon/edit/redoicon16.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Separator orientation="VERTICAL">
+                     <HBox.margin>
+                        <Insets left="3.0" />
+                     </HBox.margin>
+                  </Separator>
+                  <Button layoutX="122.0" layoutY="10.0" mnemonicParsing="false" onAction="#cutClicked" HBox.hgrow="ALWAYS">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../icon/edit/cuticon16.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button layoutX="170.0" layoutY="10.0" mnemonicParsing="false" onAction="#copyClicked" HBox.hgrow="ALWAYS">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../icon/edit/copyicon16.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button layoutX="186.0" layoutY="10.0" mnemonicParsing="false" onAction="#pasteClicked" HBox.hgrow="ALWAYS">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../icon/edit/pasteicon16.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#deleteClicked" HBox.hgrow="ALWAYS">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../icon/edit/poubelle.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Separator orientation="VERTICAL">
+                     <HBox.margin>
+                        <Insets left="3.0" />
+                     </HBox.margin>
+                  </Separator>
+                  <Button layoutX="186.0" layoutY="10.0" mnemonicParsing="false" onAction="#gameObjectEditorClicked" HBox.hgrow="ALWAYS">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../icon/window/gameobjeteditor16.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button layoutX="266.0" layoutY="10.0" mnemonicParsing="false" onAction="#animationEditorClicked" HBox.hgrow="ALWAYS">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../icon/window/animeditor16.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button layoutX="282.0" layoutY="10.0" mnemonicParsing="false" onAction="#tilesetEditorClicked" HBox.hgrow="ALWAYS">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../icon/window/tileditor.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+         </top>
+         <center>
+            <ScrollPane BorderPane.alignment="CENTER">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+              </content>
+            </ScrollPane>
+         </center>
+         <left>
+            <VBox BorderPane.alignment="CENTER">
+               <children>
+                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" />
+                  <Separator>
+                     <VBox.margin>
+                        <Insets top="2.0" />
+                     </VBox.margin>
+                  </Separator>
+                  <Pane layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" />
+                  <Separator>
+                     <VBox.margin>
+                        <Insets top="2.0" />
+                     </VBox.margin>
+                  </Separator>
+                  <TreeView maxHeight="1.7976931348623157E308" minHeight="0.0" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+               </children></VBox>
+         </left>
+      </BorderPane>
+  </children>
+</VBox>

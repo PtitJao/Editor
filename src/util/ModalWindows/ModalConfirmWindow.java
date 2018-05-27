@@ -1,10 +1,10 @@
-package Util.ModalWindows;
+package util.ModalWindows;
 
 public class ModalConfirmWindow extends ModalWindow<ModalConfirmController> {
     private boolean result = false;
 
-    public ModalConfirmWindow(String title, String message, String icon, String fxmlFile) {
-        super(title, message, icon, fxmlFile);
+    public ModalConfirmWindow(String title, String message) {
+        super(title, message, "question16.png", "confirmWindow.fxml");
         start();
     }
 

@@ -1,15 +1,14 @@
-package Util;
+package util;
 
-import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import mapEditor.MapWindow;
 import settings.SettingsWindow;
 import tilesetEditor.TilesetWindow;
 
@@ -23,7 +22,7 @@ public class Test {
         HBox hBox = new HBox();
 
         Button worldEditorButton = new Button("World editor");
-        worldEditorButton.setOnAction(e -> System.out.println("\"" + worldEditorButton.getText() + "\" is not implemented yet"));
+        worldEditorButton.setOnAction(e -> MapWindow.launchWindow());
 
         Button objectEditorButton = new Button("Object editor");
         objectEditorButton.setOnAction(e -> System.out.println("\"" + objectEditorButton.getText() + "\" is not implemented yet"));

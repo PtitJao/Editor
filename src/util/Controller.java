@@ -1,4 +1,4 @@
-package Util;
+package util;
 
 public abstract class Controller {
     public void reload(int value) {

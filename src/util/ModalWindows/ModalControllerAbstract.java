@@ -1,6 +1,6 @@
-package Util.ModalWindows;
+package util.ModalWindows;
 
-import Util.Controller;
+import util.Controller;
 
 public abstract class ModalControllerAbstract extends Controller {
     protected String message;

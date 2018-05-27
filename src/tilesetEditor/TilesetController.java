@@ -1,8 +1,8 @@
 package tilesetEditor;
 
-import Util.Controller;
+import util.Controller;
 
-import Util.Util;
+import util.Util;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -17,13 +17,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import settings.Settings;
 import settings.SettingsWindow;
 
-import java.awt.*;
 import java.io.File;
 
 public class TilesetController extends Controller {

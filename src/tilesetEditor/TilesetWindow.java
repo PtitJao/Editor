@@ -1,6 +1,6 @@
 package tilesetEditor;
 
-import Util.Window;
+import util.Window;
 import javafx.stage.Modality;
 import settings.Settings;
 

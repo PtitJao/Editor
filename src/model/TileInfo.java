@@ -1,4 +1,5 @@
-package Model;
+package model;
+
 import javafx.scene.image.Image;
 import java.util.Map;
 

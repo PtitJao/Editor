@@ -1,14 +1,13 @@
-package Model;
+package model;
 
-import javax.swing.*;
+import javafx.scene.image.Image;
 
 public class MapObject extends GameObject {
-
     private Graphics graphics;
     private Double scale;
 
-    public MapObject(String name, ImageIcon icon, Graphics graphics, Double scale) {
-        super(name, icon);
+    public MapObject(String name, Image image, Graphics graphics, Double scale) {
+        super(name, image);
         this.graphics = graphics;
         this.scale = scale;
     }

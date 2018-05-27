@@ -1,6 +1,5 @@
-package Model;
+package model;
 
-import javafx.beans.property.Property;
 import javafx.scene.image.Image;
 
 public class Tileset {

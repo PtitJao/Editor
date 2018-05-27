@@ -1,7 +1,7 @@
 package settings;
 
-import Util.ModalWindows.ModalExceptionWindow;
-import Util.ModalWindows.ModalInfoWindow;
+import util.ModalWindows.ModalExceptionWindow;
+import util.ModalWindows.ModalInfoWindow;
 
 import javax.swing.text.html.StyleSheet;
 import java.io.*;

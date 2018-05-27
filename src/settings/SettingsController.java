@@ -1,8 +1,9 @@
 package settings;
 
-import Util.Controller;
-import Util.ModalWindows.ModalExceptionWindow;
-import Util.ModalWindows.ModalInfoWindow;
+import mapEditor.MapWindow;
+import util.Controller;
+import util.ModalWindows.ModalExceptionWindow;
+import util.ModalWindows.ModalInfoWindow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -116,6 +117,8 @@ public class SettingsController extends Controller {
     private void reloadAll(int value) {
         if (TilesetWindow.INSTANCE != null)
             TilesetWindow.INSTANCE.reload(value);
+        if (MapWindow.INSTANCE != null)
+            MapWindow.INSTANCE.reload(value);
     }
 
     @FXML

@@ -1,5 +1,6 @@
 package tilesetEditor;
 
+import tilesetEditor.properties.PropertiesChoiceWindow;
 import util.Controller;
 
 import util.Util;
@@ -182,7 +183,7 @@ public class TilesetController extends Controller {
 
     @FXML
     void addClicked(ActionEvent event) {
-
+        new PropertiesChoiceWindow().start();
     }
 
     @FXML
@@ -192,11 +193,17 @@ public class TilesetController extends Controller {
 
         // EXCEPTION HERE IS NO PROBLEM
         SpinnerValueFactory factory = columnSpinner.getValueFactory();
-        factory.setValue(null);
+        try {
+            factory.setValue(null);
+        } catch (Exception e) {}
         factory = lineSpinner.getValueFactory();
-        factory.setValue(null);
+        try {
+            factory.setValue(null);
+        } catch (Exception e) {}
         factory = offsetSpinner.getValueFactory();
-        factory.setValue(null);
+        try {
+            factory.setValue(null);
+        } catch (Exception e) {}
         // END OF ACCEPTED EXCEPTION
 
         columnSpinner.setValueFactory(null);

@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.net.URL;
 
-public class Window<T extends  Controller> {
+public abstract class Window<T extends  Controller> {
     private static String ICON_PATH = "window" + File.separator;
 
     protected Stage stage;

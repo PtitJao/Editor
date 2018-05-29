@@ -44,7 +44,15 @@ public class PropertieBoolController extends PropertieSpecificationController<Bo
         list.add(Boolean.TRUE);
         list.add(Boolean.FALSE);
         valueChoice.setItems(FXCollections.observableList(list));
-        valueChoice.setValue(Boolean.TRUE);
+
+        PropertySpecification<Boolean> spec = window.getSpecif();
+        if (spec == null)
+            valueChoice.setValue(Boolean.TRUE);
+        else {
+            nameField.setText(spec.getName());
+            valueChoice.setValue(spec.getValue());
+            colorPicker.setValue(spec.getColor());
+        }
     }
 
     @FXML

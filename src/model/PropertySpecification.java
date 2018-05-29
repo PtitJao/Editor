@@ -5,25 +5,25 @@ public class PropertySpecification<T> {
 
     private String name;
     private T value;
-    private Color   c;
+    private Color color;
 
-    public PropertySpecification(String name, T value, Color c) {
+    public PropertySpecification(String name, T value, Color color) {
         this.name = name;
         this.value = value;
-        this.c = c;
+        this.color = color;
     }
 
     public void setValue(T value) {
         this.value = value;
     }
 
-    public void setC(Color c) {
+    public void setColor(Color color) {
 
-        this.c = c;
+        this.color = color;
     }
 
-    public Color getC() {
-        return c;
+    public Color getColor() {
+        return color;
     }
 
     public T getValue() {

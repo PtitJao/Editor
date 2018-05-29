@@ -10,6 +10,15 @@ import java.net.URL;
 public abstract class PropertieSpecificationWindow<T, K extends PropertieSpecificationController> extends Window<K> {
     protected PropertySpecification<T> specif = null;
 
+    public PropertieSpecificationWindow() {
+
+    }
+
+    public PropertieSpecificationWindow(PropertySpecification<T> specif) {
+        this.specif = specif;
+
+    }
+
     public void start(URL FXMLfile) {
         String title = Settings.language.getWord("propertiesSpecificationTitle");
 

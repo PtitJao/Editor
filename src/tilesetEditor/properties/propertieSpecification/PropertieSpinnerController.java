@@ -79,6 +79,13 @@ public class PropertieSpinnerController<T> extends PropertieSpecificationControl
     public void init(PropertieSpecificationWindow window, String type) {
         super.init(window);
         valueSpinner.setValueFactory(getFactory(type));
+
+        PropertySpecification<T> spec = window.getSpecif();
+        if (spec != null) {
+            nameField.setText(spec.getName());
+            valueSpinner.getValueFactory().setValue(spec.getValue());
+            colorPicker.setValue(spec.getColor());
+        }
     }
 
     @FXML

@@ -68,6 +68,25 @@ tilesetProperties:Proprietes
 tilesetValidateButton:Valider
 tilesetResetButton:Annuler
 
+PROPERTIES
+
+propertiesCreateTitle:Creer une nouvelle propriete
+propertiesModifyTitle:Modifier une propriete
+propertiesSpecificationTitle:Editer une propriete
+propertiesQuestionLabel:Choisissez un type de propiete
+propertiesName:Nom
+propertiesValue:Valeur
+propertiesColor:Couleur
+
+propertiesNameErrorTitle:Nom manquant
+propertiesNameErrorText:Le nom de la propriete ne peut pas etre vide
+
+bool:Booleen
+int:Entier
+double:Decimal
+char:Caractere
+string:Chaine de caracteres
+
 BUTTONS
 
 okButton:Ok

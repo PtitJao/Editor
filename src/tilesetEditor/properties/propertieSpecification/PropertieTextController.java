@@ -36,6 +36,18 @@ public class PropertieTextController extends PropertieSpecificationController<St
     @FXML
     private Button cancelButton;
 
+    @Override
+    public void init(PropertieSpecificationWindow window) {
+        super.init(window);
+
+        PropertySpecification<String> spec = window.getSpecif();
+        if (spec != null) {
+            nameField.setText(spec.getName());
+            valueField.setText(spec.getValue());
+            colorPicker.setValue(spec.getColor());
+        }
+    }
+
     @FXML
     void okClicked(ActionEvent event) {
         if (nameField.getText().equals("")) {

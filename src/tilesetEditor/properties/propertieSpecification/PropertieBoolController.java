@@ -4,12 +4,14 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import model.PropertySpecification;
 import settings.Settings;
+import util.ModalWindows.ModalInfoWindow;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PropertieBoolController extends PropertieSpecificationController {
+public class PropertieBoolController extends PropertieSpecificationController<Boolean> {
 
     @FXML
     private Label nameLabel;
@@ -46,13 +48,14 @@ public class PropertieBoolController extends PropertieSpecificationController {
     }
 
     @FXML
-    void cancelClicked(ActionEvent event) {
-
-    }
-
-    @FXML
     void okClicked(ActionEvent event) {
-
+        if (nameField.getText().equals("")) {
+            new ModalInfoWindow(Settings.language.getWord("propertiesNameErrorTitle"), Settings.language.getWord("propertiesNameErrorText"));
+            return;
+        }
+        PropertySpecification<Boolean> spec = new PropertySpecification<>(nameField.getText(), valueChoice.getValue(), colorPicker.getValue());
+        window.setSpecif(spec);
+        window.close();
     }
 
     @Override

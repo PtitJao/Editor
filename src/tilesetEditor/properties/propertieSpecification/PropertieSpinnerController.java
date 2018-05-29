@@ -4,12 +4,14 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import model.PropertySpecification;
 import settings.Settings;
+import util.ModalWindows.ModalInfoWindow;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PropertieSpinnerController<T> extends PropertieSpecificationController {
+public class PropertieSpinnerController<T> extends PropertieSpecificationController<T> {
 
     @FXML
     private Label nameLabel;
@@ -80,13 +82,14 @@ public class PropertieSpinnerController<T> extends PropertieSpecificationControl
     }
 
     @FXML
-    void cancelClicked(ActionEvent event) {
-
-    }
-
-    @FXML
     void okClicked(ActionEvent event) {
-
+        if (nameField.getText().equals("")) {
+            new ModalInfoWindow(Settings.language.getWord("propertiesNameErrorTitle"), Settings.language.getWord("propertiesNameErrorText"));
+            return;
+        }
+        PropertySpecification<T> spec = new PropertySpecification<>(nameField.getText(), valueSpinner.getValue(), colorPicker.getValue());
+        window.setSpecif(spec);
+        window.close();
     }
 
     @Override

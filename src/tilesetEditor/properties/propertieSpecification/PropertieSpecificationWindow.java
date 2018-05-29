@@ -1,12 +1,15 @@
 package tilesetEditor.properties.propertieSpecification;
 
 import javafx.stage.Modality;
+import model.PropertySpecification;
 import settings.Settings;
 import util.Window;
 
 import java.net.URL;
 
-public abstract class PropertieSpecificationWindow<K extends PropertieSpecificationController> extends Window<K> {
+public abstract class PropertieSpecificationWindow<T, K extends PropertieSpecificationController> extends Window<K> {
+    protected PropertySpecification<T> specif = null;
+
     public void start(URL FXMLfile) {
         String title = Settings.language.getWord("propertiesSpecificationTitle");
 
@@ -50,5 +53,11 @@ public abstract class PropertieSpecificationWindow<K extends PropertieSpecificat
         }
 
         return window;
+    }
+
+    public void setSpecif(PropertySpecification<T> specif) { this.specif = specif; }
+
+    public PropertySpecification<T> getSpecif() {
+        return specif;
     }
 }

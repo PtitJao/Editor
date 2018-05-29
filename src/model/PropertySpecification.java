@@ -1,19 +1,19 @@
 package model;
 import javafx.scene.paint.Color;
 
-public class PropertySpecification {
+public class PropertySpecification<T> {
 
     private String name;
-    private Tileset value;
+    private T value;
     private Color   c;
 
-    public PropertySpecification(String name, Tileset value, Color c) {
+    public PropertySpecification(String name, T value, Color c) {
         this.name = name;
         this.value = value;
         this.c = c;
     }
 
-    public void setValue(Tileset value) {
+    public void setValue(T value) {
         this.value = value;
     }
 
@@ -26,8 +26,7 @@ public class PropertySpecification {
         return c;
     }
 
-    public Tileset getValue() {
-
+    public T getValue() {
         return value;
     }
 

@@ -6,9 +6,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import model.PropertySpecification;
 import settings.Settings;
+import util.ModalWindows.ModalInfoWindow;
 
-public class PropertieTextController extends PropertieSpecificationController {
+public class PropertieTextController extends PropertieSpecificationController<String> {
 
     @FXML
     private Label nameLabel;
@@ -35,13 +37,14 @@ public class PropertieTextController extends PropertieSpecificationController {
     private Button cancelButton;
 
     @FXML
-    void cancelClicked(ActionEvent event) {
-
-    }
-
-    @FXML
     void okClicked(ActionEvent event) {
-
+        if (nameField.getText().equals("")) {
+            new ModalInfoWindow(Settings.language.getWord("propertiesNameErrorTitle"), Settings.language.getWord("propertiesNameErrorText"));
+            return;
+        }
+        PropertySpecification<String> spec = new PropertySpecification<>(nameField.getText(), valueField.getText(), colorPicker.getValue());
+        window.setSpecif(spec);
+        window.close();
     }
 
     @Override

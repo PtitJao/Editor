@@ -21,8 +21,9 @@ public class TilesetWindow extends Window<TilesetController> {
         stage.show();
     }
 
+    @Override
     public void close() {
-        stage.close();
+        super.close();
         INSTANCE = null;
     }
 

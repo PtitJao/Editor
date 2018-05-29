@@ -17,8 +17,4 @@ public class PropertiesModifyWindow extends Window<PropertiesModifyController> {
         stage.setResizable(false);
         stage.show();
     }
-
-    public void close() {
-        stage.close();
-    }
 }

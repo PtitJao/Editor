@@ -21,8 +21,9 @@ public class MapWindow extends Window<MapController> {
         stage.show();
     }
 
+    @Override
     public void close() {
-        stage.close();
+        super.close();
         INSTANCE = null;
     }
 

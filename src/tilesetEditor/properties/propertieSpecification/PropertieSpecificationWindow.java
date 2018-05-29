@@ -26,10 +26,6 @@ public abstract class PropertieSpecificationWindow<T, K extends PropertieSpecifi
         stage.show();
     }
 
-    public void close() {
-        stage.close();
-    }
-
     public static PropertieSpecificationWindow getWindow(String type) {
         return getWindow(type, null);
     }

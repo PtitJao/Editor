@@ -53,4 +53,8 @@ public abstract class Window<T extends  Controller> {
     public Stage getStage() {
         return stage;
     }
+
+    public void close() {
+        stage.close();
+    }
 }

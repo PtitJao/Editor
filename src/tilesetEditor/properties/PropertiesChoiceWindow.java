@@ -17,8 +17,4 @@ public class PropertiesChoiceWindow extends Window<PropertiesChoiceController> {
         stage.setResizable(false);
         stage.show();
     }
-
-    public void close() {
-        stage.close();
-    }
 }

@@ -14,7 +14,7 @@ public class ModalController extends ModalControllerAbstract {
 
     @FXML
     void okButtonClicked(ActionEvent event) {
-        window.getStage().close();
+        window.close();
     }
 
     @Override

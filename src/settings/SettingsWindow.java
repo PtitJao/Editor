@@ -20,8 +20,9 @@ public class SettingsWindow extends Window<SettingsController> {
         stage.show();
     }
 
+    @Override
     public void close() {
-        stage.close();
+        super.close();
         INSTANCE = null;
     }
 

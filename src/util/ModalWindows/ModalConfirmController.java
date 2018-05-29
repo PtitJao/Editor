@@ -19,12 +19,12 @@ public class ModalConfirmController extends ModalControllerAbstract {
     @FXML
     void noButtonPressed(ActionEvent event) {
         ((ModalConfirmWindow)window).yesClicked();
-        window.getStage().close();
+        window.close();
     }
 
     @FXML
     void yesButtonPressed(ActionEvent event) {
-        window.getStage().close();
+        window.close();
     }
 
     @Override

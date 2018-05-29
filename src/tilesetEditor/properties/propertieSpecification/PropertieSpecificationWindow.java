@@ -10,13 +10,8 @@ import java.net.URL;
 public abstract class PropertieSpecificationWindow<T, K extends PropertieSpecificationController> extends Window<K> {
     protected PropertySpecification<T> specif = null;
 
-    public PropertieSpecificationWindow() {
-
-    }
-
     public PropertieSpecificationWindow(PropertySpecification<T> specif) {
         this.specif = specif;
-
     }
 
     public void start(URL FXMLfile) {
@@ -36,27 +31,31 @@ public abstract class PropertieSpecificationWindow<T, K extends PropertieSpecifi
     }
 
     public static PropertieSpecificationWindow getWindow(String type) {
+        return getWindow(type, null);
+    }
+
+    public static PropertieSpecificationWindow getWindow(String type, PropertySpecification value) {
         PropertieSpecificationWindow window = null;
 
         switch (type) {
             case "bool":
-                window = new PropertieBoolWindow();
+                window = new PropertieBoolWindow(value);
                 ((PropertieBoolWindow)window).start();
                 break;
             case "string":
-                window = new PropertieTextWindow();
+                window = new PropertieTextWindow(value);
                 ((PropertieTextWindow)window).start();
                 break;
             case "int":
-                window = new PropertieSpinnerWindow<Integer>();
+                window = new PropertieSpinnerWindow<Integer>(value);
                 ((PropertieSpinnerWindow)window).start(type);
                 break;
             case "double":
-                window = new PropertieSpinnerWindow<Double>();
+                window = new PropertieSpinnerWindow<Double>(value);
                 ((PropertieSpinnerWindow)window).start(type);
                 break;
             case "char":
-                window = new PropertieSpinnerWindow<Character>();
+                window = new PropertieSpinnerWindow<Character>(value);
                 ((PropertieSpinnerWindow)window).start(type);
                 break;
         }

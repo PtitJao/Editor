@@ -78,6 +78,8 @@ propertiesName:Nom
 propertiesValue:Valeur
 propertiesColor:Couleur
 
+propertiesTypeErrorTitle:Type manquant
+propertiesTypeErrorText:Vous devez choisir un type
 propertiesNameErrorTitle:Nom manquant
 propertiesNameErrorText:Le nom de la propriete ne peut pas etre vide
 

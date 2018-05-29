@@ -78,6 +78,8 @@ propertiesName:Name
 propertiesValue:Value
 propertiesColor:Color
 
+propertiesTypeErrorTitle:Type missing
+propertiesTypeErrorText:You must choose a type
 propertiesNameErrorTitle:Name missing
 propertiesNameErrorText:Propertie must have a name
 

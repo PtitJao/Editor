@@ -5,19 +5,19 @@ import java.util.Map;
 
 public class TileInfo {
 
-    private Map<String,Property> properties;
+    private Map<String,String> properties;
     private Image img;
 
-    public TileInfo(Map<String, Property> properties, Image img) {
+    public TileInfo(Map<String, String> properties, Image img) {
         this.properties = properties;
         this.img = img;
     }
 
-    public Map<String, Property> getProperties() {
+    public Map<String, String> getProperties() {
         return properties;
     }
 
-    public void setProperties(Map<String, Property> properties) {
+    public void setProperties(Map<String, String> properties) {
         this.properties = properties;
     }
 

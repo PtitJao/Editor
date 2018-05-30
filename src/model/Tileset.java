@@ -2,16 +2,18 @@ package model;
 
 import javafx.scene.image.Image;
 
+import java.util.List;
+
 public class Tileset {
 
     private Image image;
     private int Columns;
     private int Rows;
     private int Offset;
-    private Property [] properties;
+    private List<Property> properties;
     private TileInfo [] tiles;
 
-    public Tileset(Image image, int columns, int rows, int offset, Property[] properties, TileInfo[] tiles) {
+    public Tileset(Image image, int columns, int rows, int offset, List<Property> properties, TileInfo[] tiles) {
         this.image = image;
         Columns = columns;
         Rows = rows;
@@ -52,11 +54,11 @@ public class Tileset {
         Offset = offset;
     }
 
-    public Property[] getProperties() {
+    public List<Property> getProperties() {
         return properties;
     }
 
-    public void setProperties(Property[] properties) {
+    public void setProperties(List<Property> properties) {
         this.properties = properties;
     }
 

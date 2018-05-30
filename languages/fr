@@ -70,7 +70,7 @@ tilesetResetButton:Annuler
 
 PROPERTIES
 
-propertiesCreateTitle:Creer une nouvelle propriete
+propertiesCreateTitle:Nouvelle propriete
 propertiesModifyTitle:Modifier une propriete
 propertiesSpecificationTitle:Editer une propriete
 propertiesQuestionLabel:Choisissez un type de propiete
@@ -82,12 +82,21 @@ propertiesTypeErrorTitle:Type manquant
 propertiesTypeErrorText:Vous devez choisir un type
 propertiesNameErrorTitle:Nom manquant
 propertiesNameErrorText:Le nom de la propriete ne peut pas etre vide
+propertiesEmptyErrorTitle:Aucune specification
+propertiesEmptyErrorText:Une propriete ne peut pas etre vide
 
 bool:Booleen
 int:Entier
 double:Decimal
 char:Caractere
 string:Chaine de caracteres
+
+MESSAGE
+
+confirmationTitle:Confirmation
+
+modificationDone:Des modifications ont ete faites
+quitQuestion:Voulez vous vraiment annuler ?
 
 BUTTONS
 

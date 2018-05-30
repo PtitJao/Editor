@@ -1,6 +1,10 @@
 package tilesetEditor;
 
+import model.Property;
+import model.PropertySpecification;
+import sun.reflect.generics.tree.Tree;
 import tilesetEditor.properties.PropertiesChoiceWindow;
+import tilesetEditor.properties.PropertiesModifyWindow;
 import util.Controller;
 
 import util.Util;
@@ -24,6 +28,8 @@ import settings.Settings;
 import settings.SettingsWindow;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TilesetController extends Controller {
     @FXML // fx:id="menuFile"
@@ -99,15 +105,46 @@ public class TilesetController extends Controller {
     private Pane tilesetPanel; // Value injected by FXMLLoader
 
     @FXML // fx:id="propertiesTree"
-    private TreeView<?> propertiesTree; // Value injected by FXMLLoader
+    private TreeView<String> propertiesTree; // Value injected by FXMLLoader
 
     private static String lastBrowse;
 
     private Image image;
     private GridPane grid;
 
+    private TreeItem<String> root;
+    private List<Property> properties = new ArrayList<>();
+
+    private TileDisplay[] tiles;
+
     private double dx;
     private double dy;
+
+    public void init() {
+        root = new TreeItem("ROOT");
+        propertiesTree.setRoot(root);
+        propertiesTree.showRootProperty().setValue(false);
+
+        propertiesTree.getSelectionModel().selectedItemProperty().addListener(e -> {
+            TreeItem<String> selection = propertiesTree.getSelectionModel().getSelectedItem();
+
+            if (selection == null)
+                return;
+
+            if (selection.getParent() != root)
+                selection = selection.getParent();
+
+            for (TreeItem<String> ti : root.getChildren())
+                ti.setExpanded(ti == selection);
+        });
+    }
+
+    private Property findProp(String name) {
+        for (Property p : properties)
+            if (p.getName().equals(name))
+                return p;
+        return null;
+    }
 
     private void sizeImageToPane() {
         dx = image.getWidth() / tilesetPanel.getWidth();
@@ -149,6 +186,14 @@ public class TilesetController extends Controller {
         tilesetPanel.getChildren().add(grid);
     }
 
+    private void divideImage() {
+        int cols = columnSpinner.getValue();
+        int lines = lineSpinner.getValue();
+        int offset = offsetSpinner.getValue();
+
+
+    }
+
     private void loadImageFile() {
         FileChooser fc = new FileChooser();
         fc.setTitle(Settings.language.getWord("tilesetBrowse"));
@@ -183,7 +228,23 @@ public class TilesetController extends Controller {
 
     @FXML
     void addClicked(ActionEvent event) {
-        new PropertiesChoiceWindow().start();
+        PropertiesChoiceWindow choice = new PropertiesChoiceWindow();
+        choice.start();
+
+        Property prop = choice.getProp();
+
+        if (prop != null && !prop.getName().equals("")) {
+            properties.add(prop);
+
+            TreeItem<String> item = new TreeItem<>(prop.getName());
+            root.getChildren().add(item);
+
+            for (PropertySpecification ps : (List<PropertySpecification>)prop.getSpecif()) {
+                TreeItem specs = new TreeItem(ps.getName(), Util.coloredSquare(ps.getColor()));
+
+                item.getChildren().add(specs);
+            }
+        }
     }
 
     @FXML
@@ -230,7 +291,24 @@ public class TilesetController extends Controller {
 
     @FXML
     void modifiyClicked(ActionEvent event) {
+        TreeItem<String> ti = propertiesTree.getSelectionModel().getSelectedItem();
 
+        if (ti == null)
+            return;
+
+        if (!ti.getParent().equals(root))
+            ti = ti.getParent();
+
+        Property p = properties.get(ti.getParent().getChildren().indexOf(ti));
+
+        PropertiesModifyWindow modifier = new PropertiesModifyWindow(p.getType());
+        modifier.start(p);
+        List<Integer> modif = modifier.getModif();
+
+        for (Integer i : modif)
+            if (i != -1) {
+                ti.getChildren().remove(i);
+            }
     }
 
     @FXML
@@ -251,7 +329,30 @@ public class TilesetController extends Controller {
 
     @FXML
     void removeClicked(ActionEvent event) {
+        TreeItem<String> ti = propertiesTree.getSelectionModel().getSelectedItem();
 
+        if (ti == null)
+            return;
+
+        if (ti.getParent().equals(root)) {
+            // PROPERTY
+            properties.remove(root.getChildren().indexOf(ti));
+            ti.getParent().getChildren().remove(ti);
+        } else {
+            // SPECIFICATION
+            Property p = properties.get(root.getChildren().indexOf(ti.getParent()));
+
+            if (p != null) {
+                p.getSpecif().remove(ti.getParent().getChildren().indexOf(ti));
+                TreeItem<String> parent = ti.getParent();
+                ti.getParent().getChildren().remove(ti);
+
+                if (p.getSpecif().size() == 0) {
+                    properties.remove(p);
+                    parent.getParent().getChildren().remove(parent);
+                }
+            }
+        }
     }
 
     @FXML
@@ -352,8 +453,5 @@ public class TilesetController extends Controller {
 
         validateButton.setText(Settings.language.getWord("tilesetValidateButton"));
         resetButton.setText(Settings.language.getWord("tilesetResetButton"));
-
-        TreeItem root = new TreeItem(Settings.language.getWord("tilesetProperties"));
-        propertiesTree.setRoot(root);
     }
 }

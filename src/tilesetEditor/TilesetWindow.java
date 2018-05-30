@@ -13,12 +13,13 @@ public class TilesetWindow extends Window<TilesetController> {
         super.start(title, "tileditor.png", getClass().getResource("tilesetEditorWindow.fxml"));
         INSTANCE = this;
 
+        controller.init();
         controller.reload(3);
         stage.setOnCloseRequest(e -> INSTANCE = null);
 
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
-        stage.show();
+        stage.showAndWait();
     }
 
     @Override

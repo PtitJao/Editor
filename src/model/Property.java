@@ -5,17 +5,19 @@ import java.util.List;
 
 public class Property<T> {
 
-    private String name;
+    private String name = "";
+    private String type;
     private List<PropertySpecification<T>> specif = new ArrayList<>();
 
-    public Property() {
+    public Property(String type) {
+        this.type = type;
     }
 
     public Property(Property<T> prop) {
-        this.name = prop.name;
+        name = prop.name;
 
-        for (PropertySpecification<T> spec : prop.specif)
-            specif.add(new PropertySpecification<T>(spec));
+        for (PropertySpecification<T> ps : prop.getSpecif())
+            specif.add(new PropertySpecification<T>(ps));
     }
 
     public String getName() {
@@ -32,5 +34,16 @@ public class Property<T> {
 
     public void setSpecif(List<PropertySpecification<T>> specif) {
         this.specif = specif;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public PropertySpecification findSpec(String name) {
+        for (PropertySpecification ps : specif)
+            if (ps.getName().equals(name))
+                return ps;
+        return null;
     }
 }

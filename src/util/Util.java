@@ -1,9 +1,8 @@
 package util;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.PixelReader;
-import javafx.scene.image.PixelWriter;
-import javafx.scene.image.WritableImage;
+import javafx.scene.image.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 import java.io.File;
 
@@ -27,5 +26,12 @@ public class Util {
                 pw.setArgb(i, j, pr.getArgb(x + i, y + j));
 
         return ret;
+    }
+
+    public static Rectangle coloredSquare(Color color) {
+        Rectangle rect = new Rectangle(16,16);
+        rect.setFill(color);
+
+        return rect;
     }
 }

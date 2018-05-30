@@ -70,10 +70,10 @@ tilesetResetButton:Cancel
 
 PROPERTIES
 
-propertiesCreateTitle:Create a new propertie
-propertiesModifyTitle:Modify a propertie
-propertiesSpecificationTitle:Edit a propertie
-propertiesQuestionLabel:Choose a propertie type
+propertiesCreateTitle:New property
+propertiesModifyTitle:Modify a property
+propertiesSpecificationTitle:Edit a property
+propertiesQuestionLabel:Choose a property type
 propertiesName:Name
 propertiesValue:Value
 propertiesColor:Color
@@ -82,12 +82,21 @@ propertiesTypeErrorTitle:Type missing
 propertiesTypeErrorText:You must choose a type
 propertiesNameErrorTitle:Name missing
 propertiesNameErrorText:Propertie must have a name
+propertiesEmptyErrorTitle:No specification
+propertiesEmptyErrorText:Propertie can't be empty
 
 bool:Boolean
 int:Integer
 double:Decimal
 char:Character
 string:Character sequence
+
+MESSAGE
+
+confirmationTitle:Confirm
+
+modificationDone:Changes have been done
+quitQuestion:Do you really want to cancel ?
 
 BUTTONS
 

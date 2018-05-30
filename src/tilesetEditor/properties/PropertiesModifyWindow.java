@@ -43,7 +43,7 @@ public class PropertiesModifyWindow<T> extends Window<PropertiesModifyController
         return controller.getProp();
     }
 
-    public List<Integer> getModif() {
-        return controller.getModif();
+    public List<Integer> getRemove() {
+        return controller.getRemove();
     }
 }

@@ -120,30 +120,54 @@ public class TilesetController extends Controller {
     private double dx;
     private double dy;
 
+    private Selection selection;
+
     public void init() {
+        selection = new Selection(-1, -1);
+
         root = new TreeItem("ROOT");
         propertiesTree.setRoot(root);
         propertiesTree.showRootProperty().setValue(false);
 
         propertiesTree.getSelectionModel().selectedItemProperty().addListener(e -> {
-            TreeItem<String> selection = propertiesTree.getSelectionModel().getSelectedItem();
+            TreeItem<String> selected = propertiesTree.getSelectionModel().getSelectedItem();
 
-            if (selection == null)
+            if (selected == null) {
+                selection.iProp = -1;
+                selection.iSpec = -1;
+
+                for (TileDisplay td : tiles)
+                    td.displayNoPropertie();
+
                 return;
+            }
 
-            if (selection.getParent() != root)
-                selection = selection.getParent();
+            if (selected.getParent() != root) {
+                selection.iSpec = selected.getParent().getChildren().indexOf(selected);
+                selected = selected.getParent();
+                selection.iProp = selected.getParent().getChildren().indexOf(selected);
+            } else {
+                selection.iProp = selected.getParent().getChildren().indexOf(selected);
+                selection.iSpec = -1;
+            }
 
-            for (TreeItem<String> ti : root.getChildren())
-                ti.setExpanded(ti == selection);
+            if (tiles != null)
+                for (TileDisplay td : tiles)
+                    td.displayPropertie(properties.get(selection.iProp));
+
+
+            /*for (TreeItem<String> ti : selection.getParent().getChildren())
+                ti.setExpanded(ti == selection);*/
         });
+
+        tilesetPanel.setOnMouseClicked(e -> panelClicked());
+        tilesetPanel.setOnMouseDragged(e -> panelClicked());
     }
 
-    private Property findProp(String name) {
-        for (Property p : properties)
-            if (p.getName().equals(name))
-                return p;
-        return null;
+    private void panelClicked() {
+        if (selection.iProp != -1 && tiles != null)
+            for (TileDisplay td : tiles)
+                td.displayPropertie(properties.get(selection.iProp));
     }
 
     private void sizeImageToPane() {
@@ -174,24 +198,65 @@ public class TilesetController extends Controller {
             imagePanel.setFitHeight(height);
         }
 
+        if (grid != null)
+            tilesetPanel.getChildren().clear();
+
         grid = new GridPane();
         grid.setGridLinesVisible(true);
         grid.setTranslateX(x);
         grid.setTranslateY(y);
+
+        grid.setMinWidth(width);
+        grid.setMaxWidth(width);
         grid.setPrefWidth(width);
+
+        grid.setMinHeight(height);
+        grid.setMaxHeight(height);
         grid.setPrefHeight(height);
 
-        imagePanel.setImage(image);
-        grid.add(imagePanel, 0, 0);
         tilesetPanel.getChildren().add(grid);
     }
 
     private void divideImage() {
+        grid.getChildren().clear();
+        grid.setVgap(1);
+        grid.setHgap(1);
+
+        if (dx > dy)
+            grid.setTranslateY((tilesetPanel.getHeight() - image.getHeight() / dx) / 2);
+        else
+            grid.setTranslateX((tilesetPanel.getWidth() - image.getWidth() / dy) / 2);
+
         int cols = columnSpinner.getValue();
         int lines = lineSpinner.getValue();
         int offset = offsetSpinner.getValue();
 
+        int width = ((int)image.getWidth() - offset) / cols - offset;
+        int height = ((int)image.getHeight() - offset) / lines - offset;
 
+        double fitW = (grid.getWidth() - grid.getHgap() * (cols + 1)) / cols;
+        double fitH = (grid.getHeight() - grid.getVgap() * (lines + 1)) / lines;
+
+        tiles = new TileDisplay[cols * lines];
+
+        for (int i = 0; i < cols; ++i) {
+            for (int j = 0; j < lines; ++j) {
+                int offX = offset + i * (width + offset);
+                int offY = offset + j * (height + offset);
+                Image img = Util.subimage(image, offX, offY, width, height);
+
+                TileDisplay td = new TileDisplay(img, selection, fitW, fitH);
+                tiles[i + j * cols] = td;
+
+                grid.add(td, i, j);
+            }
+        }
+
+        for (TileDisplay td : tiles)
+            for (int i = 0; i < properties.size(); ++i)
+                td.addProperty();
+
+        grid.setGridLinesVisible(true);
     }
 
     private void loadImageFile() {
@@ -213,11 +278,14 @@ public class TilesetController extends Controller {
 
             tilesetPanel.getChildren().clear();
             image = new Image("file:" + file.getAbsolutePath());
+
             sizeImageToPane();
 
             columnSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, (int)image.getWidth(), 1));
             lineSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, (int)image.getHeight(), 1));
             offsetSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 5, 0));
+
+            divideImage();
         }
     }
 
@@ -244,6 +312,11 @@ public class TilesetController extends Controller {
 
                 item.getChildren().add(specs);
             }
+
+
+            if (tiles != null)
+                for (TileDisplay td : tiles)
+                    td.addProperty();
         }
     }
 
@@ -298,17 +371,27 @@ public class TilesetController extends Controller {
 
         if (!ti.getParent().equals(root))
             ti = ti.getParent();
+        propertiesTree.getSelectionModel().select(ti);
 
         Property p = properties.get(ti.getParent().getChildren().indexOf(ti));
 
         PropertiesModifyWindow modifier = new PropertiesModifyWindow(p.getType());
         modifier.start(p);
-        List<Integer> modif = modifier.getModif();
 
-        for (Integer i : modif)
-            if (i != -1) {
-                ti.getChildren().remove(i);
-            }
+        ti.setValue(p.getName());
+        ti.getChildren().clear();
+
+        for (PropertySpecification ps : (List<PropertySpecification>)p.getSpecif()) {
+            TreeItem specs = new TreeItem(ps.getName(), Util.coloredSquare(ps.getColor()));
+
+            ti.getChildren().add(specs);
+        }
+
+        List<Integer> remove = modifier.getRemove();
+
+        for (TileDisplay td : tiles)
+            for (Integer i : remove)
+                td.removeSpec(ti.getParent().getChildren().indexOf(ti), i);
     }
 
     @FXML
@@ -337,6 +420,8 @@ public class TilesetController extends Controller {
         if (ti.getParent().equals(root)) {
             // PROPERTY
             properties.remove(root.getChildren().indexOf(ti));
+            for (TileDisplay td : tiles)
+                td.removeProperty(ti.getParent().getChildren().indexOf(ti));
             ti.getParent().getChildren().remove(ti);
         } else {
             // SPECIFICATION
@@ -349,6 +434,8 @@ public class TilesetController extends Controller {
 
                 if (p.getSpecif().size() == 0) {
                     properties.remove(p);
+                    for (TileDisplay td : tiles)
+                        td.removeProperty(parent.getParent().getChildren().indexOf(parent));
                     parent.getParent().getChildren().remove(parent);
                 }
             }
@@ -367,51 +454,7 @@ public class TilesetController extends Controller {
 
     @FXML
     void validateClicked(ActionEvent event) {
-        grid = new GridPane();
-        grid.setGridLinesVisible(true);
-        grid.setVgap(1);
-        grid.setHgap(1);
-
-        if (dx > dy)
-            grid.setTranslateY((tilesetPanel.getHeight() - image.getHeight() / dx) / 2);
-        else
-            grid.setTranslateX((tilesetPanel.getWidth() - image.getWidth() / dy) / 2);
-
-        int cols = columnSpinner.getValue();
-        int lines = lineSpinner.getValue();
-        int offset = offsetSpinner.getValue();
-
-        int width = ((int)image.getWidth() - offset) / cols - offset;
-        int height = ((int)image.getHeight() - offset) / lines - offset;
-
-        for (int i = 0; i < cols; ++i) {
-            for (int j = 0; j < lines; ++j) {
-                int offX = offset + i * (width + offset);
-                int offY = offset + j * (height + offset);
-                Image img = Util.subimage(image, offX, offY, width, height);
-                ImageView iw = new ImageView(img);
-                iw.setPreserveRatio(true);
-
-                StackPane sp = new StackPane();
-
-                sp.setOnMouseEntered(e -> draw(sp, iw));
-                sp.setOnMouseExited(e -> redraw(sp, iw));
-
-                if (dx > dy)
-                    iw.setFitWidth((tilesetPanel.getWidth() - grid.getHgap() * (cols + 1)) / cols);
-                else
-                    iw.setFitHeight((tilesetPanel.getHeight() - grid.getVgap() * (lines + 1)) / lines);
-
-                sp.getChildren().add(iw);
-
-                grid.add(sp, i, j);
-            }
-        }
-
-        grid.setGridLinesVisible(true);
-
-        tilesetPanel.getChildren().clear();
-        tilesetPanel.getChildren().add(grid);
+        divideImage();
     }
 
     private void draw(StackPane sp, ImageView iw) {

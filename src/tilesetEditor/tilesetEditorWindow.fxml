@@ -166,7 +166,7 @@
                </children>
             </VBox>
             <Separator orientation="VERTICAL" HBox.hgrow="ALWAYS" />
-            <Pane fx:id="tilesetPanel" prefWidth="216.0" HBox.hgrow="ALWAYS">
+            <Pane fx:id="tilesetPanel" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="216.0" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets right="5.0" />
                </HBox.margin>

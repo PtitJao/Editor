@@ -17,13 +17,13 @@ public class TileDisplay extends StackPane {
     private Rectangle rect;
     private List<Integer> properties = new ArrayList<>();
 
-    private Integer iProp;
-    private Integer iSpec;
+    private Selection selection;
 
-    public TileDisplay(Image img, Integer iProp, Integer iSpec) {
+    public TileDisplay(Image img, Selection selection, double width, double height) {
+        setPrefSize(width, height);
+
         this.img = img;
-        this.iProp = iProp;
-        this.iSpec = iSpec;
+        this.selection = selection;
 
         ImageView iw = new ImageView(img);
         iw.setPreserveRatio(true);
@@ -31,10 +31,10 @@ public class TileDisplay extends StackPane {
 
         getChildren().add(iw);
 
-        select = new Rectangle(getWidth(), getHeight());
+        select = new Rectangle(width, height);
         select.setFill(new Color(1,1,1,0.3));
 
-        rect = new Rectangle(getWidth(), getHeight());
+        rect = new Rectangle(width, height);
         rect.setFill(new Color(1,1,1,0));
 
         getChildren().add(rect);
@@ -42,11 +42,13 @@ public class TileDisplay extends StackPane {
         setOnMouseEntered(e -> getChildren().add(select));
         setOnMouseExited(e -> getChildren().remove(select));
         setOnMouseClicked(e -> click());
+        setOnMouseDragged(e -> click());
+        setOnMouseDragOver(e -> click());
     }
 
     public void click() {
-        if (iProp != -1 && iSpec != -1) {
-            properties.set(iProp, iSpec);
+        if (selection.iProp != -1 && selection.iSpec != -1) {
+            properties.set(selection.iProp, selection.iSpec);
         }
     }
 
@@ -65,10 +67,10 @@ public class TileDisplay extends StackPane {
             properties.set(prop, properties.get(prop) - 1);
     }
 
-    public void displayPropertie(int index, Property prop) {
-        PropertySpecification ps = (PropertySpecification)prop.getSpecif().get(properties.get(index));
+    public void displayPropertie(Property prop) {
+        PropertySpecification ps = (PropertySpecification)prop.getSpecif().get(properties.get(selection.iProp));
         Color c = ps.getColor();
-        rect.setFill(new Color(c.getRed(), c.getGreen(), c.getBlue(), 0.5));
+        rect.setFill(new Color(c.getRed(), c.getGreen(), c.getBlue(), 0.7));
     }
 
     public void displayNoPropertie() {

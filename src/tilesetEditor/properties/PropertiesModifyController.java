@@ -31,7 +31,9 @@ public class PropertiesModifyController<T> extends Controller {
     private PropertiesModifyWindow window;
     private Property<T> prop;
     private ObservableList<PropertySpecification<T>> oList;
-    private List<Integer> modif = new ArrayList<>();
+
+    private int size;
+    private List<Integer> remove = new ArrayList<>();
 
     @FXML // fx:id="nameLabel"
     private Label nameLabel; // Value injected by FXMLLoader
@@ -61,6 +63,7 @@ public class PropertiesModifyController<T> extends Controller {
         this.window = window;
         oList = FXCollections.observableList(new ArrayList<>(prop.getSpecif()));
         nameField.setText(prop.getName());
+        size = prop.getSpecif().size();
 
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         valueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
@@ -77,7 +80,6 @@ public class PropertiesModifyController<T> extends Controller {
         if (spec != null)
             oList.add(spec);
 
-        modif.add(-1);
     }
 
     @FXML
@@ -117,7 +119,11 @@ public class PropertiesModifyController<T> extends Controller {
         PropertySpecification<T> spec = table.getSelectionModel().getSelectedItem();
 
         if (spec != null) {
-            modif.add(oList.indexOf(spec));
+            if (oList.indexOf(spec) < size) {
+                size--;
+                remove.add(oList.indexOf(spec));
+            }
+
             oList.remove(spec);
         }
     }
@@ -130,9 +136,7 @@ public class PropertiesModifyController<T> extends Controller {
         this.prop = prop;
     }
 
-    public List<Integer> getModif() {
-        return modif;
-    }
+    public List<Integer> getRemove() { return remove; }
 
     @Override
     protected void languageChanged() {

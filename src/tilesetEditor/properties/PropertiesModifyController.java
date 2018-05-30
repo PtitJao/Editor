@@ -21,14 +21,17 @@ import settings.Settings;
 import tilesetEditor.properties.propertieSpecification.PropertieSpecificationWindow;
 import util.Controller;
 import util.ModalWindows.ModalConfirmWindow;
+import util.ModalWindows.ModalInfoWindow;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public class PropertiesModifyController<T> extends Controller {
     private PropertiesModifyWindow window;
     private Property<T> prop;
     private ObservableList<PropertySpecification<T>> oList;
+    private List<Integer> modif = new ArrayList<>();
 
     @FXML // fx:id="nameLabel"
     private Label nameLabel; // Value injected by FXMLLoader
@@ -57,6 +60,7 @@ public class PropertiesModifyController<T> extends Controller {
     public void init(PropertiesModifyWindow window) {
         this.window = window;
         oList = FXCollections.observableList(new ArrayList<>(prop.getSpecif()));
+        nameField.setText(prop.getName());
 
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         valueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
@@ -72,6 +76,8 @@ public class PropertiesModifyController<T> extends Controller {
 
         if (spec != null)
             oList.add(spec);
+
+        modif.add(-1);
     }
 
     @FXML
@@ -94,6 +100,14 @@ public class PropertiesModifyController<T> extends Controller {
 
     @FXML
     void okClicked(ActionEvent event) {
+        if (nameField.getText().equals("")) {
+            new ModalInfoWindow(Settings.language.getWord("propertiesNameErrorTitle"), Settings.language.getWord("propertiesNameErrorText"));
+            return;
+        } else if (oList.size() == 0) {
+            new ModalInfoWindow(Settings.language.getWord("propertiesEmptyErrorTitle"), Settings.language.getWord("propertiesEmptyErrorText"));
+            return;
+        }
+        prop.setName(nameField.getText());
         prop.setSpecif(oList);
         window.close();
     }
@@ -102,8 +116,10 @@ public class PropertiesModifyController<T> extends Controller {
     void removeClicked(ActionEvent event) {
         PropertySpecification<T> spec = table.getSelectionModel().getSelectedItem();
 
-        if (spec != null)
+        if (spec != null) {
+            modif.add(oList.indexOf(spec));
             oList.remove(spec);
+        }
     }
 
     public Property getProp() {
@@ -112,6 +128,10 @@ public class PropertiesModifyController<T> extends Controller {
 
     public void setProp(Property prop) {
         this.prop = prop;
+    }
+
+    public List<Integer> getModif() {
+        return modif;
     }
 
     @Override

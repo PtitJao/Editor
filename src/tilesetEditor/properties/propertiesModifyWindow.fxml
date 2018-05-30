@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tilesetEditor.properties.PropertiesModifyController">
+<VBox xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tilesetEditor.properties.PropertiesModifyController">
    <children>
       <HBox alignment="CENTER" spacing="5.0">
          <children>
@@ -58,9 +58,9 @@
       </HBox>
       <TableView fx:id="table" prefHeight="170.0" prefWidth="300.0" VBox.vgrow="ALWAYS">
         <columns>
-          <TableColumn fx:id="nameColumn" prefWidth="100.0" resizable="false" text="Name" />
-          <TableColumn fx:id="valueColumn" prefWidth="100.0" resizable="false" text="Value" />
-            <TableColumn fx:id="colorColumn" prefWidth="100.0" resizable="false" text="Color" />
+          <TableColumn fx:id="nameColumn" prefWidth="100.0" resizable="false" sortable="false" text="Name" />
+          <TableColumn fx:id="valueColumn" prefWidth="100.0" resizable="false" sortable="false" text="Value" />
+            <TableColumn fx:id="colorColumn" prefWidth="100.0" resizable="false" sortable="false" text="Color" />
         </columns>
       </TableView>
       <Separator>

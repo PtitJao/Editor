@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.util.StringConverter;
 import model.PropertySpecification;
 import settings.Settings;
 import util.ModalWindows.ModalInfoWindow;
@@ -37,40 +38,42 @@ public class PropertieSpinnerController<T> extends PropertieSpecificationControl
     @FXML
     private Button cancelButton;
 
+    private List<Character> alphabet;
+
     private SpinnerValueFactory getFactory(String type) {
         switch (type) {
             case "int":
                 return new SpinnerValueFactory.IntegerSpinnerValueFactory(Integer.MIN_VALUE, Integer.MAX_VALUE, 0);
             case "double":
-                return new SpinnerValueFactory.DoubleSpinnerValueFactory(Double.MIN_VALUE, Double.MAX_VALUE, 0);
+                return new SpinnerValueFactory.DoubleSpinnerValueFactory(Double.MIN_VALUE, Double.MAX_VALUE, 0, 0.00001);
             case "char":
-                List<Character> chars = new ArrayList<>();
+                alphabet = new ArrayList<>();
 
                 for(int i = 0; i < 26; ++i)
-                    chars.add((char)('a' + i));
+                    alphabet.add((char)((int)'a' + i));
                 for(int i = 0; i < 26; ++i)
-                    chars.add((char)('A' + i));
+                    alphabet.add((char)((int)'A' + i));
                 for(int i = 0; i < 10; ++i)
-                    chars.add((char)('0' + i));
+                    alphabet.add((char)((int)'0' + i));
 
-                chars.add('#');
-                chars.add('%');
-                chars.add('&');
-                chars.add('_');
-                chars.add('@');
-                chars.add('-');
-                chars.add('+');
-                chars.add('*');
-                chars.add('/');
-                chars.add('$');
-                chars.add('=');
-                chars.add('(');
-                chars.add(')');
-                chars.add('[');
-                chars.add(']');
-                chars.add('|');
+                alphabet.add('#');
+                alphabet.add('%');
+                alphabet.add('&');
+                alphabet.add('_');
+                alphabet.add('@');
+                alphabet.add('-');
+                alphabet.add('+');
+                alphabet.add('*');
+                alphabet.add('/');
+                alphabet.add('$');
+                alphabet.add('=');
+                alphabet.add('(');
+                alphabet.add(')');
+                alphabet.add('[');
+                alphabet.add(']');
+                alphabet.add('|');
 
-                return new SpinnerValueFactory.ListSpinnerValueFactory<Character>(FXCollections.observableList(chars));
+                return new SpinnerValueFactory.ListSpinnerValueFactory<>(FXCollections.observableList(alphabet));
             default:
                 return null;
         }
@@ -79,6 +82,15 @@ public class PropertieSpinnerController<T> extends PropertieSpecificationControl
     public void init(PropertieSpecificationWindow window) {
         super.init(window);
         valueSpinner.setValueFactory(getFactory(((PropertieSpinnerWindow)window).getType()));
+        valueSpinner.focusedProperty().addListener((s, ov, nv) -> {
+            if (!nv) {
+                String text = valueSpinner.getEditor().getText();
+                StringConverter<T> converter = valueSpinner.getValueFactory().getConverter();
+
+                if (converter != null)
+                    valueSpinner.getValueFactory().setValue(converter.fromString(text));
+            }
+        });
 
         PropertySpecification<T> spec = window.getSpecif();
         if (spec != null) {

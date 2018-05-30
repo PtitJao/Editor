@@ -22,7 +22,7 @@ public abstract class PropertieSpecificationWindow<T, K extends PropertieSpecifi
         controller.reload(3);
         controller.init(this);
 
-        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
         stage.showAndWait();
     }

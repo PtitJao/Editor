@@ -5,6 +5,8 @@ import model.Property;
 import settings.Settings;
 import util.Window;
 
+import java.util.List;
+
 public class PropertiesModifyWindow<T> extends Window<PropertiesModifyController<T>> {
     private String type;
 
@@ -26,7 +28,7 @@ public class PropertiesModifyWindow<T> extends Window<PropertiesModifyController
         super.start(title, "modifPropertie.png", getClass().getResource("propertiesModifyWindow.fxml"));
 
         if (prop == null)
-            controller.setProp(new Property<T>());
+            controller.setProp(new Property<T>(type));
         else
             controller.setProp(prop);
         controller.init(this);
@@ -39,5 +41,9 @@ public class PropertiesModifyWindow<T> extends Window<PropertiesModifyController
 
     public Property getProp() {
         return controller.getProp();
+    }
+
+    public List<Integer> getModif() {
+        return controller.getModif();
     }
 }

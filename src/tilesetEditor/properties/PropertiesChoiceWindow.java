@@ -1,6 +1,7 @@
 package tilesetEditor.properties;
 
 import javafx.stage.Modality;
+import model.Property;
 import settings.Settings;
 import util.Window;
 
@@ -15,6 +16,10 @@ public class PropertiesChoiceWindow extends Window<PropertiesChoiceController> {
 
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
-        stage.show();
+        stage.showAndWait();
+    }
+
+    public Property getProp() {
+        return controller.getProp();
     }
 }

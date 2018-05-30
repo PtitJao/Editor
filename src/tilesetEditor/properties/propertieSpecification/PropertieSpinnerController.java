@@ -76,9 +76,9 @@ public class PropertieSpinnerController<T> extends PropertieSpecificationControl
         }
     }
 
-    public void init(PropertieSpecificationWindow window, String type) {
+    public void init(PropertieSpecificationWindow window) {
         super.init(window);
-        valueSpinner.setValueFactory(getFactory(type));
+        valueSpinner.setValueFactory(getFactory(((PropertieSpinnerWindow)window).getType()));
 
         PropertySpecification<T> spec = window.getSpecif();
         if (spec != null) {

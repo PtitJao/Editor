@@ -13,6 +13,12 @@ public class PropertySpecification<T> {
         this.color = color;
     }
 
+    public PropertySpecification(PropertySpecification<T> specif) {
+        this.name = specif.name;
+        this.value = specif.value;
+        this.color = specif.color;
+    }
+
     public void setValue(T value) {
         this.value = value;
     }

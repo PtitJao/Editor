@@ -56,11 +56,11 @@
             </Button>
          </children>
       </HBox>
-      <TableView fx:id="table" prefHeight="170.0" prefWidth="248.0" VBox.vgrow="ALWAYS">
+      <TableView fx:id="table" prefHeight="170.0" prefWidth="300.0" VBox.vgrow="ALWAYS">
         <columns>
-          <TableColumn fx:id="nameColumn" prefWidth="82.0" resizable="false" text="Name" />
-          <TableColumn fx:id="valueColumn" prefWidth="84.0" resizable="false" text="Value" />
-            <TableColumn fx:id="colorColumn" prefWidth="81.0" resizable="false" text="Color" />
+          <TableColumn fx:id="nameColumn" prefWidth="100.0" resizable="false" text="Name" />
+          <TableColumn fx:id="valueColumn" prefWidth="100.0" resizable="false" text="Value" />
+            <TableColumn fx:id="colorColumn" prefWidth="100.0" resizable="false" text="Color" />
         </columns>
       </TableView>
       <Separator>

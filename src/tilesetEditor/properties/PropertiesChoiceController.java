@@ -83,9 +83,9 @@ public class PropertiesChoiceController extends Controller {
         }
 
         if (modifier != null) {
-            window.close();
             modifier.start();
             prop = modifier.getProp();
+            window.close();
         } else
             new ModalInfoWindow(Settings.language.getWord("propertiesTypeErrorTitle"), Settings.language.getWord("propertiesTypeErrorText"));
     }

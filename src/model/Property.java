@@ -1,16 +1,21 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Property {
+public class Property<T> {
 
     private String name;
+    private List<PropertySpecification<T>> specif = new ArrayList<>();
 
-    private List<PropertySpecification> specif;
+    public Property() {
+    }
 
-    public Property(String name, List<PropertySpecification> specif) {
-        this.name = name;
-        this.specif = specif;
+    public Property(Property<T> prop) {
+        this.name = prop.name;
+
+        for (PropertySpecification<T> spec : prop.specif)
+            specif.add(new PropertySpecification<T>(spec));
     }
 
     public String getName() {
@@ -21,11 +26,11 @@ public class Property {
         this.name = name;
     }
 
-    public List<PropertySpecification> getSpecif() {
+    public List<PropertySpecification<T>> getSpecif() {
         return specif;
     }
 
-    public void setSpecif(List<PropertySpecification> specif) {
+    public void setSpecif(List<PropertySpecification<T>> specif) {
         this.specif = specif;
     }
 }

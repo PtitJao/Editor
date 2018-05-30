@@ -46,6 +46,7 @@ public class PropertieBoolController extends PropertieSpecificationController<Bo
         valueChoice.setItems(FXCollections.observableList(list));
 
         PropertySpecification<Boolean> spec = window.getSpecif();
+
         if (spec == null)
             valueChoice.setValue(Boolean.TRUE);
         else {

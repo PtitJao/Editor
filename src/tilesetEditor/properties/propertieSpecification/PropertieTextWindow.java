@@ -9,7 +9,5 @@ public class PropertieTextWindow extends PropertieSpecificationWindow<String, Pr
 
     public void start() {
         super.start(getClass().getResource("propertieTextWindow.fxml"));
-
-        controller.init(this);
     }
 }

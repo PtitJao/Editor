@@ -1,4 +1,4 @@
-package Util;
+package util;
 
 import org.json.*;
 import org.json.simple.parser.JSONParser;
@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.util.List;
 
 public class Json {
-
 
     private String nom;
     private Integer value;

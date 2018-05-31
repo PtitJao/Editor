@@ -2,11 +2,13 @@ package tilesetEditor;
 
 import model.Property;
 import model.PropertySpecification;
-import sun.reflect.generics.tree.Tree;
+import model.TileInfo;
+import model.Tileset;
 import tilesetEditor.properties.PropertiesChoiceWindow;
 import tilesetEditor.properties.PropertiesModifyWindow;
 import util.Controller;
 
+import util.ModalWindows.ModalInfoWindow;
 import util.Util;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -116,6 +118,7 @@ public class TilesetController extends Controller {
     private List<Property> properties = new ArrayList<>();
 
     private TileDisplay[] tiles;
+    private Tileset tileset;
 
     private double dx;
     private double dy;
@@ -160,11 +163,11 @@ public class TilesetController extends Controller {
                 ti.setExpanded(ti == selection);*/
         });
 
-        tilesetPanel.setOnMouseClicked(e -> panelClicked());
-        tilesetPanel.setOnMouseDragged(e -> panelClicked());
+        tilesetPanel.setOnMouseClicked(e -> actualizeTiles());
+        tilesetPanel.setOnMouseDragged(e -> actualizeTiles());
     }
 
-    private void panelClicked() {
+    private void actualizeTiles() {
         if (selection.iProp != -1 && tiles != null)
             for (TileDisplay td : tiles)
                 td.displayPropertie(properties.get(selection.iProp));
@@ -349,6 +352,11 @@ public class TilesetController extends Controller {
 
     @FXML
     void exportClicked(ActionEvent event) {
+        if (properties.size() == 0) {
+            new ModalInfoWindow(Settings.language.getWord("propertiesExportErrorTitle"), Settings.language.getWord("propertiesExportErrorText"));
+            return;
+        }
+        File file = getPropsFile(Settings.language.getWord("propertiesBrowseExport"));
 
     }
 
@@ -359,7 +367,34 @@ public class TilesetController extends Controller {
 
     @FXML
     void importClicked(ActionEvent event) {
+        File file = getPropsFile(Settings.language.getWord("propertiesBrowseImport"));
 
+        if (file != null) {
+            List<Property> loadedprops = null;
+
+            properties = loadedprops;
+
+            if (tiles != null)
+                for (TileDisplay td : tiles)
+                    for (Property p : properties)
+                        td.addProperty();
+        }
+    }
+
+    public File getPropsFile(String title) {
+        FileChooser fc = new FileChooser();
+        fc.setTitle(title);
+        fc.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Tileset", "*.tls"));
+
+        if (lastBrowse != null)
+            fc.setInitialDirectory(new File(lastBrowse));
+
+        File file = fc.showOpenDialog(TilesetWindow.INSTANCE.getStage());
+
+        if (file != null)
+            lastBrowse = file.getParent();
+        return file;
     }
 
     @FXML
@@ -392,6 +427,7 @@ public class TilesetController extends Controller {
         for (TileDisplay td : tiles)
             for (Integer i : remove)
                 td.removeSpec(ti.getParent().getChildren().indexOf(ti), i);
+        actualizeTiles();
     }
 
     @FXML
@@ -402,6 +438,8 @@ public class TilesetController extends Controller {
 
     @FXML
     void openClicked(ActionEvent event) {
+        if (!Settings.checkDirectory())
+            return;
 
     }
 
@@ -444,7 +482,23 @@ public class TilesetController extends Controller {
 
     @FXML
     void saveClicked(ActionEvent event) {
+        if (nameField.getText().equals("")) {
+            new ModalInfoWindow(Settings.language.getWord("tilesetNameErrorTitle"), Settings.language.getWord("tilesetNameErrorText"));
+            return;
+        }
+        if (!Settings.checkDirectory())
+            return;
 
+        updateTileset();
+    }
+
+    public void updateTileset() {
+        TileInfo[] tmp = new TileInfo[tiles.length];
+
+        for (int i = 0; i < tmp.length; ++i)
+            tmp[i] = new TileInfo(tiles[i].getProps());
+
+        tileset = new Tileset(image, nameField.getText(), columnSpinner.getValue(), lineSpinner.getValue(), offsetSpinner.getValue(), properties, tmp);
     }
 
     @FXML
@@ -455,22 +509,34 @@ public class TilesetController extends Controller {
     @FXML
     void validateClicked(ActionEvent event) {
         divideImage();
-    }
-
-    private void draw(StackPane sp, ImageView iw) {
-        Rectangle rect = new Rectangle(0,0,sp.getWidth(),sp.getHeight());
-        rect.setFill(new Color(1,1,1,0.3));
-        sp.getChildren().add(rect);
-    }
-
-    private void redraw(StackPane sp, ImageView iw) {
-        sp.getChildren().clear();
-        sp.getChildren().add(iw);
+        updateTileset();
     }
 
     @FXML
     void resetClicked(ActionEvent event) {
+        rollbackTileset();
+    }
 
+    public void rollbackTileset() {
+        if (tileset == null)
+            return;
+
+        image = tileset.getImage();
+        nameField.setText(tileset.getName());
+
+        columnSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, (int)image.getWidth(), tileset.getColumns()));
+        lineSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, (int)image.getHeight(), tileset.getRows()));
+        offsetSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 5, tileset.getOffset()));
+
+        divideImage();
+
+        properties = new ArrayList<>();
+
+        for (Property p : tileset.getProps())
+            properties.add(new Property(p));
+
+        for (int i = 0; i < tiles.length; ++i)
+            tiles[i].setProps(tileset.getTiles()[i].getProps());
     }
 
     @Override

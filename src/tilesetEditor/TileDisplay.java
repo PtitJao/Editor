@@ -39,11 +39,18 @@ public class TileDisplay extends StackPane {
 
         getChildren().add(rect);
 
-        setOnMouseEntered(e -> getChildren().add(select));
+        setOnMouseEntered(e -> {
+            getChildren().add(select);
+            if (e.isPrimaryButtonDown())
+                click();
+        });
         setOnMouseExited(e -> getChildren().remove(select));
+
         setOnMouseClicked(e -> click());
         setOnMouseDragged(e -> click());
         setOnMouseDragOver(e -> click());
+        setOnMouseDragEntered(e -> click());
+        setOnMousePressed(e -> click());
     }
 
     public void click() {
@@ -75,5 +82,16 @@ public class TileDisplay extends StackPane {
 
     public void displayNoPropertie() {
         rect.setFill(new Color(1,1,1,0));
+    }
+
+    public List<Integer> getProps() {
+        return properties;
+    }
+
+    public void setProps(List<Integer> props) {
+        properties = new ArrayList<>();
+
+        for (Integer i : props)
+            properties.add(new Integer(i));
     }
 }

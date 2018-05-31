@@ -76,4 +76,10 @@ public class Settings {
             new ModalExceptionWindow("Default language", "Unable to load default language.\nApplication will close.");
         }
     }
+
+    public static boolean checkDirectory() {
+        if (defaultDirectory.equals(""))
+            new ModalInfoWindow(language.getWord("defaultDirectoryTitle"), language.getWord("defaultDirectoryText") + "\n" + language.getWord("defaultDirectoryText2"));
+        return !defaultDirectory.equals("");
+    }
 }

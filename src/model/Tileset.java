@@ -5,19 +5,20 @@ import javafx.scene.image.Image;
 import java.util.List;
 
 public class Tileset {
-
     private Image image;
-    private int Columns;
-    private int Rows;
-    private int Offset;
+    private String name;
+    private int columns;
+    private int rows;
+    private int offset;
     private List<Property> properties;
-    private TileInfo [] tiles;
+    private TileInfo[] tiles;
 
-    public Tileset(Image image, int columns, int rows, int offset, List<Property> properties, TileInfo[] tiles) {
+    public Tileset(Image image, String name, int columns, int rows, int offset, List<Property> properties, TileInfo[] tiles) {
         this.image = image;
-        Columns = columns;
-        Rows = rows;
-        Offset = offset;
+        this.name = name;
+        this.columns = columns;
+        this.rows = rows;
+        this.offset = offset;
         this.properties = properties;
         this.tiles = tiles;
     }
@@ -26,47 +27,27 @@ public class Tileset {
         return image;
     }
 
-    public void setImage(Image image) {
-        this.image = image;
+    public String getName() {
+        return name;
     }
 
     public int getColumns() {
-        return Columns;
-    }
-
-    public void setColumns(int columns) {
-        Columns = columns;
+        return columns;
     }
 
     public int getRows() {
-        return Rows;
-    }
-
-    public void setRows(int rows) {
-        Rows = rows;
+        return rows;
     }
 
     public int getOffset() {
-        return Offset;
+        return offset;
     }
 
-    public void setOffset(int offset) {
-        Offset = offset;
-    }
-
-    public List<Property> getProperties() {
+    public List<Property> getProps() {
         return properties;
-    }
-
-    public void setProperties(List<Property> properties) {
-        this.properties = properties;
     }
 
     public TileInfo[] getTiles() {
         return tiles;
-    }
-
-    public void setTiles(TileInfo[] tiles) {
-        this.tiles = tiles;
     }
 }

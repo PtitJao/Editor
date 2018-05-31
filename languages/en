@@ -68,6 +68,9 @@ tilesetProperties:Properties
 tilesetValidateButton:Validate
 tilesetResetButton:Cancel
 
+tilesetNameErrorTitle:Name missing
+tilesetNameErrorText:Tileset must have a name
+
 PROPERTIES
 
 propertiesCreateTitle:New property
@@ -85,6 +88,11 @@ propertiesNameErrorText:Propertie must have a name
 propertiesEmptyErrorTitle:No specification
 propertiesEmptyErrorText:Propertie can't be empty
 
+propertiesBrowseImport:Import properties
+propertiesBrowseExport:Export properties
+propertiesExportErrorTitle:Unable to export
+propertiesExportErrorText:No property to export
+
 bool:Boolean
 int:Integer
 double:Decimal
@@ -92,6 +100,10 @@ char:Character
 string:Character sequence
 
 MESSAGE
+
+defaultDirectoryTitle:Project directory
+defaultDirectoryText:Project directory is not define
+defaultDirectoryText2:Go to the settings to define it
 
 confirmationTitle:Confirm
 

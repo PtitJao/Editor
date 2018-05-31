@@ -68,6 +68,9 @@ tilesetProperties:Proprietes
 tilesetValidateButton:Valider
 tilesetResetButton:Annuler
 
+tilesetNameErrorTitle:Nom manquant
+tilesetNameErrorText:Le nom du tileset ne peut pas etre vide
+
 PROPERTIES
 
 propertiesCreateTitle:Nouvelle propriete
@@ -85,6 +88,11 @@ propertiesNameErrorText:Le nom de la propriete ne peut pas etre vide
 propertiesEmptyErrorTitle:Aucune specification
 propertiesEmptyErrorText:Une propriete ne peut pas etre vide
 
+propertiesBrowseImport:Importer des proprietes
+propertiesBrowseExport:Exporter des proprietes
+propertiesExportErrorTitle:Impossible d'exporter
+propertiesExportErrorText:Pas de propriete a exporter
+
 bool:Booleen
 int:Entier
 double:Decimal
@@ -92,6 +100,10 @@ char:Caractere
 string:Chaine de caracteres
 
 MESSAGE
+
+defaultDirectoryTitle:Dossier de projet
+defaultDirectoryText:Le dossier du projet n'est pas defini
+defaultDirectoryText2:Allez dans les options pour le definir
 
 confirmationTitle:Confirmation
 

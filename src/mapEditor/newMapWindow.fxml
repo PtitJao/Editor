@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapEditor.NewMapController">
+   <children>
+      <HBox>
+         <children>
+            <HBox alignment="CENTER" spacing="5.0">
+               <children>
+                  <VBox alignment="CENTER" spacing="18.0">
+                     <children>
+                        <Label fx:id="nameLabel" text="Label" />
+                        <Label fx:id="tilesetLabel" layoutX="10.0" layoutY="10.0" text="Label" />
+                        <Label fx:id="mapWidthLabel" layoutX="10.0" layoutY="10.0" text="Label" />
+                        <Label fx:id="mapHeightLabel" layoutX="10.0" layoutY="10.0" text="Label" />
+                        <Label fx:id="tileWidthLabel" layoutX="10.0" layoutY="10.0" text="Label" />
+                        <Label fx:id="tileHeightLabel" text="Label" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" spacing="10.0">
+                     <children>
+                        <TextField fx:id="nameField" maxWidth="1.7976931348623157E308" />
+                        <ChoiceBox fx:id="tilesetChoice" maxWidth="1.7976931348623157E308" />
+                        <Spinner fx:id="mapWidthSpinner" editable="true" layoutX="10.0" layoutY="35.0" maxWidth="1.7976931348623157E308" />
+                        <Spinner fx:id="mapHeightSpinner" editable="true" layoutX="10.0" layoutY="60.0" maxWidth="1.7976931348623157E308" />
+                        <Spinner fx:id="tileWidthSpinner" editable="true" layoutX="10.0" layoutY="35.0" maxWidth="1.7976931348623157E308" />
+                        <Spinner fx:id="tileHeightSpinner" editable="true" layoutX="10.0" layoutY="110.0" maxWidth="1.7976931348623157E308" />
+                     </children>
+                  </VBox>
+               </children>
+               <HBox.margin>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </HBox.margin>
+            </HBox>
+            <Separator orientation="VERTICAL" />
+            <VBox>
+               <children>
+                  <Pane fx:id="tilesetPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="180.0">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Pane>
+                  <Separator />
+                  <HBox alignment="CENTER" spacing="40.0">
+                     <children>
+                        <VBox alignment="CENTER" spacing="10.0">
+                           <children>
+                              <Label fx:id="tileLabel" text="Label" />
+                              <Button fx:id="tileButton" mnemonicParsing="false" onAction="#noneClicked" text="Button" />
+                           </children>
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </HBox.margin>
+                        </VBox>
+                        <Pane fx:id="tilePanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0">
+                           <opaqueInsets>
+                              <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                           </opaqueInsets>
+                        </Pane>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <Separator />
+      <HBox alignment="CENTER_RIGHT" spacing="1.0">
+         <children>
+            <Button fx:id="createButton" mnemonicParsing="false" onAction="#createClicked" text="Button" />
+            <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelClicked" text="Button" />
+         </children>
+         <VBox.margin>
+            <Insets top="3.0" />
+         </VBox.margin>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</VBox>

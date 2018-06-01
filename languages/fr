@@ -34,6 +34,23 @@ menuHelpAbout:A propos
 MAP EDITOR
 
 mapTitle:Editeur de carte
+newMapTitle:Creer une carte
+mapNameLabel:Nom
+tilesetLabel:Tileset
+mapWidthLabel:Largeur de la carte
+mapHeightLabel:Hauteur de la carte
+tileWidthLabel:Largeur des cases
+tileHeightLabel:Hauteur des cases
+tileLabel:Case par defaut
+
+palette:Palette
+layer:Couche
+
+mapNameErrorTitle:Nom manquant
+mapNameErrorText:La carte doit avoir un nom
+
+tileButton:Aucune
+createButton:Creer
 
 OBJECT EDITOR
 
@@ -56,6 +73,7 @@ settingsDirectoryErrorMessage:n'est pas un dossier
 TILESET WINDOW
 
 tilesetTitle:Editeur de tileset
+tilesetOpenTitle:Charger un tileset
 tilesetFileLabel:Fichier
 tilesetFilenameLabel:Nom du fichier image
 tilesetBrowse:Chercher une image
@@ -67,7 +85,10 @@ tilesetOffsetLabel:Decalage
 tilesetProperties:Proprietes
 tilesetValidateButton:Valider
 tilesetResetButton:Annuler
+tilesetOpenLabel:Ouvrir un tileset
 
+tilesetOpenErrorTitle:Aucun tileset choisi
+tilesetOpenErrorText:Vous devez choisir un tileset
 tilesetNameErrorTitle:Nom manquant
 tilesetNameErrorText:Le nom du tileset ne peut pas etre vide
 

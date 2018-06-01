@@ -34,6 +34,23 @@ menuHelpAbout:About
 MAP EDITOR
 
 mapTitle:Map editor
+newMapTitle:Create a map
+mapNameLabel:Name
+tilesetLabel:Tileset
+mapWidthLabel:Map width
+mapHeightLabel:Map height
+tileWidthLabel:Tile width
+tileHeightLabel:Tile height
+tileLabel:Default tile
+
+palette:Palette
+layer:Layer
+
+mapNameErrorTitle:Name missing
+mapNameErrorText:Map must have a name
+
+tileButton:None
+createButton:Create
 
 OBJECT EDITOR
 
@@ -56,6 +73,7 @@ settingsDirectoryErrorMessage:is not a folder
 TILESET WINDOW
 
 tilesetTitle:Tileset editor
+tilesetOpenTitle:Load tileset
 tilesetFileLabel:File
 tilesetFilenameLabel:Image filename
 tilesetBrowse:Browse an image file
@@ -67,7 +85,10 @@ tilesetOffsetLabel:Offset
 tilesetProperties:Properties
 tilesetValidateButton:Validate
 tilesetResetButton:Cancel
+tilesetOpenLabel:Open a tileset
 
+tilesetOpenErrorTitle:No tileset choosen
+tilesetOpenErrorText:You must choose a tileset
 tilesetNameErrorTitle:Name missing
 tilesetNameErrorText:Tileset must have a name
 

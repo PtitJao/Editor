@@ -2,6 +2,7 @@ package util;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import mapEditor.MapWindow;
 import settings.Settings;
 
 public class Main extends Application {
@@ -14,6 +15,6 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         Settings.init();
 
-        new Test().start();
+        MapWindow.launchWindow();
     }
 }

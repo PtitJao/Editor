@@ -6,9 +6,8 @@ package mapEditor;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckMenuItem;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
 import settings.Settings;
 import settings.SettingsWindow;
 import tilesetEditor.TilesetWindow;
@@ -100,6 +99,22 @@ public class MapController extends Controller{
     @FXML // fx:id="menuHelpAbout"
     private MenuItem menuHelpAbout; // Value injected by FXMLLoader
 
+    @FXML // fx:id="mapPanel"
+    private ScrollPane mapPanel; // Value injected by FXMLLoader
+
+    @FXML // fx:id="minimapPanel"
+    private Pane minimapPanel; // Value injected by FXMLLoader
+
+    @FXML // fx:id="previewPanel"
+    private Pane previewPanel; // Value injected by FXMLLoader
+
+    @FXML // fx:id="fileTree"
+    private TreeView<?> fileTree; // Value injected by FXMLLoader
+
+    public void init() {
+        Palette.launchWindow();
+    }
+
     @FXML
     void aboutClicked(ActionEvent event) {
 
@@ -142,7 +157,7 @@ public class MapController extends Controller{
 
     @FXML
     void newMapClicked(ActionEvent event) {
-
+        new NewMapWindow().start();
     }
 
     @FXML
@@ -152,7 +167,7 @@ public class MapController extends Controller{
 
     @FXML
     void paletteClicked(ActionEvent event) {
-
+        Palette.launchWindow();
     }
 
     @FXML

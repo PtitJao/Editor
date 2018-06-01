@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapEditor.PaletteTerrainController">
+   <children>
+      <HBox alignment="CENTER" spacing="1.0">
+         <children>
+            <Label fx:id="layerLabel" text="Label">
+               <HBox.margin>
+                  <Insets right="4.0" />
+               </HBox.margin></Label>
+            <ChoiceBox fx:id="layerChoice" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+            <Button mnemonicParsing="false" onAction="#addTilesetButton">
+               <graphic>
+                  <ImageView>
+                     <image>
+                        <Image url="@../icon/tilesetEditor/+.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
+      <Separator>
+         <VBox.margin>
+            <Insets top="2.0" />
+         </VBox.margin>
+      </Separator>
+      <Button fx:id="selectionButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#selectionClicked">
+         <graphic>
+            <ImageView>
+               <image>
+                  <Image url="@../icon/mapEditor/cursoricon16.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <HBox alignment="CENTER">
+         <children>
+            <Button fx:id="pencilButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pencilClicked" HBox.hgrow="ALWAYS">
+               <graphic>
+                  <ImageView>
+                     <image>
+                        <Image url="@../icon/mapEditor/painticon16.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button fx:id="eraseButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#eraseClicked" HBox.hgrow="ALWAYS">
+               <graphic>
+                  <ImageView>
+                     <image>
+                        <Image url="@../icon/mapEditor/eraseicon16.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER">
+         <children>
+            <Button fx:id="squareButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareClicked" HBox.hgrow="ALWAYS">
+               <graphic>
+                  <ImageView>
+                     <image>
+                        <Image url="@../icon/mapEditor/carré16.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button fx:id="roundButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#roundClicked" HBox.hgrow="ALWAYS">
+               <graphic>
+                  <ImageView>
+                     <image>
+                        <Image url="@../icon/mapEditor/rond16.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+         </children>
+      </HBox>
+      <Pane fx:id="tilesetPanel" prefHeight="150.0" prefWidth="150.0">
+         <VBox.margin>
+            <Insets top="2.0" />
+         </VBox.margin>
+      </Pane>
+   </children>
+</VBox>

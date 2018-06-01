@@ -29,7 +29,7 @@ import javafx.stage.FileChooser;
 import settings.Settings;
 import settings.SettingsWindow;
 
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -174,6 +174,10 @@ public class TilesetController extends Controller {
     }
 
     private void sizeImageToPane() {
+        columnSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, (int)image.getWidth(), 1));
+        lineSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, (int)image.getHeight(), 1));
+        offsetSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 5, 0));
+
         dx = image.getWidth() / tilesetPanel.getWidth();
         dy = image.getHeight() / tilesetPanel.getHeight();
 
@@ -283,11 +287,6 @@ public class TilesetController extends Controller {
             image = new Image("file:" + file.getAbsolutePath());
 
             sizeImageToPane();
-
-            columnSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, (int)image.getWidth(), 1));
-            lineSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, (int)image.getHeight(), 1));
-            offsetSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 5, 0));
-
             divideImage();
         }
     }
@@ -358,6 +357,23 @@ public class TilesetController extends Controller {
         }
         File file = getPropsFile(Settings.language.getWord("propertiesBrowseExport"));
 
+        try {
+            OutputStream os = new FileOutputStream(file);
+            OutputStreamWriter osw = new OutputStreamWriter(os);
+            BufferedWriter bw = new BufferedWriter(osw);
+
+            bw.write(properties.size() + "\n");
+            for (Property p : properties)
+                p.bullshitSave(bw);
+
+            bw.close();
+            osw.close();
+            os.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     @FXML
@@ -370,7 +386,22 @@ public class TilesetController extends Controller {
         File file = getPropsFile(Settings.language.getWord("propertiesBrowseImport"));
 
         if (file != null) {
-            List<Property> loadedprops = null;
+            List<Property> loadedprops = new ArrayList<>();
+
+            try {
+                InputStream is = new FileInputStream(file);
+                InputStreamReader isr = new InputStreamReader(is);
+                BufferedReader br = new BufferedReader(isr);
+
+                int size = Integer.parseInt(br.readLine());
+                for (int i = 0; i < size; ++i)
+                    loadedprops.add(Property.bullshitLoad(br));
+
+                br.close();
+                isr.close();
+                is.close();
+            } catch (Exception e) {
+            }
 
             properties = loadedprops;
 
@@ -378,6 +409,18 @@ public class TilesetController extends Controller {
                 for (TileDisplay td : tiles)
                     for (Property p : properties)
                         td.addProperty();
+
+            root.getChildren().clear();
+            for (Property p : properties) {
+                TreeItem<String> prop = new TreeItem<>(p.getName());
+                root.getChildren().add(prop);
+
+                for (PropertySpecification ps : (List<PropertySpecification>)p.getSpecif()) {
+                    TreeItem specs = new TreeItem(ps.getName(), Util.coloredSquare(ps.getColor()));
+
+                    prop.getChildren().add(specs);
+                }
+            }
         }
     }
 
@@ -385,7 +428,7 @@ public class TilesetController extends Controller {
         FileChooser fc = new FileChooser();
         fc.setTitle(title);
         fc.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Tileset", "*.tls"));
+                new FileChooser.ExtensionFilter("Tileset properties", "*.tlsProps"));
 
         if (lastBrowse != null)
             fc.setInitialDirectory(new File(lastBrowse));
@@ -441,6 +484,50 @@ public class TilesetController extends Controller {
         if (!Settings.checkDirectory())
             return;
 
+        OpenTilesetWindow opener = new OpenTilesetWindow();
+        opener.start();
+
+        String name = opener.getChoosed();
+
+        if (name.equals(""))
+            return;
+        File file = Tileset.getFile(name);
+
+        try {
+            InputStream is = new FileInputStream(file);
+            InputStreamReader isr = new InputStreamReader(is);
+            BufferedReader br = new BufferedReader(isr);
+
+            tileset = Tileset.bullshitLoad(br);
+
+            br.close();
+            isr.close();
+            is.close();
+
+            image = tileset.getImage();
+
+            properties = new ArrayList<>();
+            for (Property p : tileset.getProps())
+                properties.add(new Property(p));
+
+
+            root.getChildren().clear();
+            for (Property p : properties) {
+                TreeItem<String> prop = new TreeItem<>(p.getName());
+                root.getChildren().add(prop);
+
+                for (PropertySpecification ps : (List<PropertySpecification>)p.getSpecif()) {
+                    TreeItem specs = new TreeItem(ps.getName(), Util.coloredSquare(ps.getColor()));
+
+                    prop.getChildren().add(specs);
+                }
+            }
+
+            sizeImageToPane();
+            rollbackTileset();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -490,6 +577,22 @@ public class TilesetController extends Controller {
             return;
 
         updateTileset();
+
+        File file = Tileset.getFile(tileset.getName());
+
+        try {
+            OutputStream os = new FileOutputStream(file);
+            OutputStreamWriter osw = new OutputStreamWriter(os);
+            BufferedWriter bw = new BufferedWriter(osw);
+
+            tileset.bullshitSave(bw);
+
+            bw.close();
+            osw.close();
+            os.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void updateTileset() {
@@ -521,7 +624,6 @@ public class TilesetController extends Controller {
         if (tileset == null)
             return;
 
-        image = tileset.getImage();
         nameField.setText(tileset.getName());
 
         columnSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, (int)image.getWidth(), tileset.getColumns()));
@@ -530,13 +632,10 @@ public class TilesetController extends Controller {
 
         divideImage();
 
-        properties = new ArrayList<>();
-
-        for (Property p : tileset.getProps())
-            properties.add(new Property(p));
-
         for (int i = 0; i < tiles.length; ++i)
             tiles[i].setProps(tileset.getTiles()[i].getProps());
+
+        actualizeTiles();
     }
 
     @Override

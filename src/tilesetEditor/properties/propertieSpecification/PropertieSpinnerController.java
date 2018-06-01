@@ -38,8 +38,6 @@ public class PropertieSpinnerController<T> extends PropertieSpecificationControl
     @FXML
     private Button cancelButton;
 
-    private List<Character> alphabet;
-
     private SpinnerValueFactory getFactory(String type) {
         switch (type) {
             case "int":
@@ -47,7 +45,7 @@ public class PropertieSpinnerController<T> extends PropertieSpecificationControl
             case "double":
                 return new SpinnerValueFactory.DoubleSpinnerValueFactory(Double.MIN_VALUE, Double.MAX_VALUE, 0, 0.00001);
             case "char":
-                alphabet = new ArrayList<>();
+                List<Character> alphabet = new ArrayList<>();
 
                 for(int i = 0; i < 26; ++i)
                     alphabet.add((char)((int)'a' + i));

@@ -1,5 +1,7 @@
 package model;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,10 +42,29 @@ public class Property<T> {
         return type;
     }
 
-    public PropertySpecification findSpec(String name) {
+    public void bullshitSave(BufferedWriter bw) throws Exception {
+        bw.write(name + "\n");
+        bw.write(type + "\n");
+        bw.write(specif.size() + "\n");
+
         for (PropertySpecification ps : specif)
-            if (ps.getName().equals(name))
-                return ps;
-        return null;
+            ps.bullshitSave(bw);
+    }
+
+    public static Property bullshitLoad(BufferedReader br) throws Exception {
+        String name = br.readLine();
+        String type = br.readLine();
+        int size = Integer.parseInt(br.readLine());
+
+        List<PropertySpecification> specs = new ArrayList<>();
+
+        for (int i = 0; i < size; ++i)
+            specs.add(PropertySpecification.bullshitLoad(br, type));
+
+        Property p = new Property(type);
+        p.setName(name);
+        p.setSpecif(specs);
+
+        return p;
     }
 }
